@@ -1,0 +1,73 @@
+# Kirby .htaccess
+
+# rewrite rules
+<IfModule mod_rewrite.c>
+
+# enable awesome urls. i.e.: 
+# http://yourdomain.com/about-us/team
+RewriteEngine on
+
+# make sure to set the RewriteBase correctly
+# if you are running the site in a subfolder.
+# Otherwise links or the entire site will break.
+# 
+# If your homepage is http://yourdomain.com/mysite
+# Set the RewriteBase to:
+# 
+# RewriteBase /mysite
+# 
+RewriteBase /
+
+#RewriteRule ^content/(.*)\.(jpg|png|mp4|m4v|gif)$ test
+
+# block text files in the content folder from being accessed directly
+RewriteRule ^content/(.*)\.(txt|md|mdown)$ error [R=301,L]
+
+# block all files in the site folder from being accessed directly
+RewriteRule ^site/(.*) error [R=301,L]
+
+# block all files in the kirby folder from being accessed directly
+RewriteRule ^kirby/(.*) error [R=301,L]
+
+# block access to twitter yaml file
+RewriteRule (.*)\.(yaml)$ error [R=301,L]
+
+# redirect tweets deep linking
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tweets/(.*)/?$ tweets/index.html [L]
+
+
+# make panel links work
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^panel/(.*) panel/index.php [L]
+
+# make rss feed use feedpress.me
+RewriteCond %{HTTP_USER_AGENT} !FeedValidator [NC]
+RewriteCond %{HTTP_USER_AGENT} !FeedPress [NC]
+RewriteRule ^feed/?$ http://feedpress.me/joe-sh [R=302,NC,L]
+
+
+# smokescreen shortcut
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^smk/?$ bin/smokescreen/index.html [R=301,L]
+RewriteRule ^smk/(.*) bin/smokescreen/demos/$1 [R=301,L]
+
+
+
+# make site links work
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*) index.php [L]
+ 
+</IfModule>
+
+
+# Additional recommended values
+# Remove comments for those you want to use. 
+# 
+# AddDefaultCharset UTF-8
+#
+# php_flag short_open_tag on 

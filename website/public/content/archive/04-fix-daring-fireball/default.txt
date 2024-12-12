@@ -1,0 +1,35 @@
+Title: Fix DaringFireball.net
+----
+Subtitle: The only good Yankee's post-season is a dead Yankee's post-season
+----
+Link: http://github.com/josephschmitt/Fix-Daring-Fireball-Logo/
+----
+Date: Oct 15, 2010 5:25pm
+----
+Text:
+
+As those who follow John Gruber's [Daring Fireball](http://daringfireball.net) know, whenever the Yankees make it into the playoffs, Gruber replaces his fireball logo with an incredibly annoying Yankees logo. To remedy this situation, I wrote a quick [Safari](http://github.com/downloads/josephschmitt/Fix-Daring-Fireball-Logo/fixdf.safariextz) and [Chrome](http://github.com/downloads/josephschmitt/Fix-Daring-Fireball-Logo/fixdf.chromeextension.crx) extension that replaces the incorrect[^1] logo with either the normal DF one, or with an alternate:
+
+Normal Daring Fireball  
+(image: df-standard.jpeg)
+
+Alternate Daring Fireball  
+(image: df-phillies.jpeg)
+
+Fixed.
+
+I also let you choose between all 3 non-Yankee teams that made the division series, not just the Phillies:
+
+(image: df-giants.png)
+
+(image: df-rangers.png)
+
+Might as well be fair to everyone.
+
+[Download Safari Extension](http://github.com/downloads/josephschmitt/Fix-Daring-Fireball-Logo/fixdf.safariextz)[^2] — [Download Chrome Extension](http://github.com/downloads/josephschmitt/Fix-Daring-Fireball-Logo/fixdf.chromeextension.crx).
+
+View [project on GitHub](http://github.com/josephschmitt/Fix-Daring-Fireball-Logo).
+
+[^1]: I really don't care what John puts as the logo; it's his website and he can do whatever he wants. I just thought it'd be a fun little exercise to write the extension. I'm definitely not one of the 1,000's complaining about him being a Yankees fan: he can be whatever he likes.
+
+[^2]: If clicking the link in Safari doesn't start the download, try option+clicking.

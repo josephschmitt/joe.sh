@@ -1,0 +1,55 @@
+Title: Drawing Resolution Less-Dependent Graphics
+----
+Short: Retina Graphics
+----
+Subtitle: For when you just have to have retina.
+----
+Date: Jul 27, 2011 4:56pm
+----
+Text:
+
+(image: resolution.jpg)
+
+One of the great recent additions to modern browsers is the [<code>&lt;canvas&gt;</code>](https://developer.mozilla.org/en/html/canvas) element. The <code>&lt;canvas&gt;</code> element enables a whole new world of client-side scripting awesomeness by allowing you to draw graphics into an HTML element via JavaScript.
+
+That's awesome!
+
+However, a popular misconception[^1] exists with the <code>&lt;canvas&gt;</code> element: <code>&lt;canvas&gt;</code> graphics are not vector graphics, they're [raster](http://en.wikipedia.org/wiki/Raster_graphics). What does this mean? It means if you're viewing your beautiful <code>&lt;canvas&gt;</code> artwork on a [device](http://www.apple.com/ios/) that [supports](http://www.android.com/) zooming, once you zoom past 100%, your artwork will get pixelated.
+
+That sucks!
+
+So, how do we solve this? As it so happens, this issue was [solved several years ago](http://www.webkit.org/blog/55/high-dpi-web-sites/) before these zoomable devices were even on the market by none other than the Webkit team:
+
+>The img element already supports specifying explicit sizes, and so today you can specify a width and height and if an image is larger it will be downscaled. In a high DPI system where 1 CSS pixel != 1 device pixel, more detail can then be rendered.
+>
+>In other words how you scale an image is based off comparing *device pixels* and not CSS pixels. For example, if you have a zoom factor of 2, an img tag that specifies a width and height of 100 CSS pixels, and an image whose intrinsic size is 200×200
+device pixels, then that image is not scaled, since 100×2 = 200. However on a lower DPI display that might not have any zoom factor set, the 200×200 image would be properly downscaled to 100×100.
+
+The basic strategy here is two-fold. First, we provide a graphic whose dimensions are _greater than the dimension we intend on displaying them at_. This means if we want to display a 50x50 pixel image we use a 100x100 or 200x200 pixel image instead. Then, we resize our nice large image back down to 50x50 pixels (using either CSS or the width and height attributes). The net effect here is that when you zoom in on your image, the High DPI display will show all that extra pixel information, while normal displays will be none the wiser.
+
+What does this <code>&lt;img&gt;</code> magic have to do with our friendly <code>&lt;canvas&gt;</code> element? As it so happens, we can apply this same exact strategy. If we draw out our <code>&lt;canvas&gt;</code> _larger_ than we need it to be, then resize it back down, we get nice, crisp artwork even when you right up in its grill. So instead of drawing your 50x50 pixel canvas artwork at 50x50 pixels, try drawing a 100x100 pixel (200x200, 800x800, whatever you please) <code>&lt;canvas&gt;</code> element and then shrinking it back down to 50x50 pixels in CSS.
+
+You can actually see this at work in the Vimeo video player:
+ 
+ <br />
+**Awesome**:
+(image: awesome.png alt:Awesome)
+ 
+<br />
+**Not so Awesome**:
+(image: not-so-awesome.png alt:Not so Awesome)
+
+<br/>
+What's really great about using this technique with the <code>&lt;canvas&gt;</code> element versus simply linking to a larger image within the <code>&lt;img&gt;</code> tag is that since graphics are being drawn client-side you're not loading extra bytes over the network that are potentially 2-4 times larger than you really need[^2].
+
+Script on!
+
+Further reading:
+
+* [Optimising for High Pixel Density Displays](http://menacingcloud.com/?c=highPixelDensityDisplays)
+* [Resolution Independent Mobile UI](http://www.sencha.com/blog/resolution-independent-mobile-ui)
+
+<br />
+[^1]: I think some of the confusion stems from how the word vector is used in relation to <code>&lt;canvas&gt;</code>. The <code>&lt;canvas&gt;</code> API is “vector” in the mathematical/physical sense, meaning a line is drawn by defining a direction, and a magnitude. It is _not_ vector in the sense that the graphics are re-drawn each time the view updates (ie. when you zoom in). Once <code>&lt;canvas&gt;</code> graphics are drawn, they exists as rasterized pixels and cannot be manipulated as separate objects, unlike [SVG](https://developer.mozilla.org/en/SVG).
+
+[^2]: Ah yes, there's always a footnote next to a sentence saying there's no downside. While it's true you're not loading in extra-large artwork, saving you the cost of transferring that over the network, you still are drawing 2-4 times as many pixels on the screen. This can potentially have an effect on drawing speed, memory usage, and animation performance. So just be aware of these caveats and test often.

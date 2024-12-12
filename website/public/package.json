@@ -1,0 +1,20 @@
+{
+  "name": "joe.sh",
+  "version": "0.0.0",
+  "description": "Personal website for Joseph Schmitt",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Joseph Schmitt",
+  "license": "BSD",
+  "readmeFilename": "readme.mdown",
+  "gitHead": "a61dab44dc78bdba0f09b475379a6baf83e17aac",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-uglify": "~0.1.2",
+    "grunt-contrib-sass": "~0.2.2",
+    "grunt-contrib-watch": "~0.3.1"
+  }
+}

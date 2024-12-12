@@ -1,0 +1,66 @@
+Title: Clamp.js v0.2
+----
+Subtitle: Explanations and Performance Updates
+----
+Link: 
+----
+Date: Jan 28, 2011 4:34pm
+----
+Text:
+
+A couple of weeks ago I [released](http://josephschmitt.net/290/introducing-clamp-js) a cool little utility called [Clamp.js](https://github.com/josephschmitt/Clamp.js) that helps with clamping (ie. adding ellipsis to) long pieces of html text. I was pretty excited about its release, though I stated that one downside was that performance improvements could be made on it since it loops character-by-character through a piece of text, checking to see if it fits each time.
+
+After some really constructive conversations with people on twitter and on this blog, I made some updates to how Clamp.js loops through text looking for a good fit. However, before I go into that, it's probably constructive to visualize how Clamp.js used to work.
+
+**Clamp.js v0.1**
+
+<p class="fit-wrapper" style="padding-top: 75%;"><object width="100%" height="100%"> <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625801092311%2Fshow%2F&page_show_back_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625801092311%2F&set_id=72157625801092311&jump_to="></param> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=124984"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=124984" allowFullScreen="true" flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625801092311%2Fshow%2F&page_show_back_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625801092311%2F&set_id=72157625801092311&jump_to=" width="100%" height="100%"></embed></object></p>
+
+
+1.  Step one is figuring out how much we want to clamp. In this example, we want to clamp this 9 line piece of content down to 7 lines, visualized by the red line.
+
+2.  Next, Clamp.js selects the last character.
+
+3.  Then it adds ellipsis and checks to see if the condition has been satisfied (the condition being 7 lines of text). The condition hasn't been met, so it removes the currently selected letter and tries again with the next.
+
+4.  This is repeated until it finally does meet the condition and the component is finished.
+
+As you can see, this method certainly *works*, but it's a bit of a brute force method of doing things. It works particularly well when clamping short sentences or phrases like headings (which is what I originally wrote this plugin for), but is less than optimal when clamping long pieces of text line blog entries where you only need to display a few lines.
+
+One popular suggestion was to be able to declare which direction to clamp from, either from the back to the front or from the front to the back. This would allow you to use back-to-front clamping for headings and front-to-back clamping for paragraphs. This is a good suggestion and one that I will most likely implement in the future, but I also wanted to address the performance of the clamping engine itself.
+
+After a few back-and-forths with [Dave DeSando](http://dropshado.ws/) on Twitter, I came up with the following (quite clever, I feel) solution for speeding up clamping:
+
+**Clamp.js v0.2**
+
+<p class="fit-wrapper" style="padding-top: 75%;"><object width="100%" height="100%"> <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625926454240%2Fshow%2F&page_show_back_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625926454240%2F&set_id=72157625926454240&jump_to="></param> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=124984"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=124984" allowFullScreen="true" flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625926454240%2Fshow%2F&page_show_back_url=%2Fphotos%2Fjayjo221%2Fsets%2F72157625926454240%2F&set_id=72157625926454240&jump_to=" width="100%" height="100%"></embed></object></p>
+
+Before we even start, there's a new option in Clamp.js called splitOnChars which is an array of string characters. What this array does is tell the component how it should try and grab large chunks to try and remove before it resorts to going character-by-character. For example, the default array might look like this: ['.', ',', ' ']. What that's telling Clamp.js is to try removing chunks based on periods (ie. sentences), then try chunks based on commas (sentence fragments), and finally spaces (words). This allows us to remove larger pieces of text at a time before falling back on character-by-character removals. Using the above array, here's what the new Clamp.js does:
+
+1.  Our first character to split on is a period, so Clamp.js finds the last period in our text.
+
+2.  It then selects everything after the character, giving us our first large chunk. Notice how much larger this chunk is than just a single character.
+
+3.  Clamp.js next tries removing this entire chunk to see what happens. If removing it still leaves us with a phrase that's too long, it'll try removing the next chunk/sentence. In this case however, it seems we've removed too much.
+
+4.  Since we've removed too much, we'll go to the next split-character on the list, which is a comma. Clamp.js finds the last comma.
+
+5.  It selects the fragment after the comma.
+
+6.  The fragment is removed. You'll notice that this time the text is still too long, so it'll select the next comma and try again. However, that *is* too much. So we'll have to move on to the last split-character: the space.
+
+7.  It finds the last space in the text.
+
+8.  Selects everything after that space.
+
+9.  That last fragment is removed. It's still too long, so it'll try doing so again, but doing so again makes it too short. So we move on to the last and final split-character which is splitting on each individual character. This last one doesn't have to be in the array because the last step will *always* be splitting on single characters.
+
+10. The last character is selected.
+
+11. The character is removed and it adds ellipses to see if it fits.
+
+12. This step is repeated until there is an exact fit.
+
+Using this technique, we can remove really large chunks really quickly, and gradually narrow down our search until we go character-by-character on the final word. How much more efficient is this? Well, just in this example, with v0.1 Clamp.js would have looped around 29 times. With v0.2, it only has to loop 7! If that's not an improvement, I don't know what is!
+
+The real neat thing about this is you can submit your own array of characters that you want Clamp.js to split on. Suppose your text has a lot of exclamation points. Then you can submit an array that includes those to try to speed up the process. I'm pretty excited about these improvements and can't wait to hear what you think of them. Drop me a line via email or let me know how you feel publicly in the comments below.

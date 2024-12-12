@@ -1,0 +1,10 @@
+---
+services:
+  kirby:
+    image: php:5.6-apache
+    container_name: kirby
+    ports:
+      - "8090:80"
+    command: /bin/bash -c "a2enmod rewrite && apache2-foreground"
+    volumes:
+      - ./website/public:/var/www/html

@@ -1,0 +1,27 @@
+@font-face {
+	font-family: 'icons';
+	src:url('../fonts/icons.eot');
+	src:url('../fonts/icons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icons.woff') format('woff'),
+		url('../fonts/icons.ttf') format('truetype'),
+		url('../fonts/icons.svg#icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+//@font-face {
+//    font-family: 'cousineregular';
+//    src: url('../fonts/cousine-regular-webfont.eot');
+//    src: url('../fonts/cousine-regular-webfont.eot?#iefix') format('embedded-opentype'),
+//         url('../fonts/cousine-regular-webfont.woff') format('woff'),
+//         url('../fonts/cousine-regular-webfont.ttf') format('truetype'),
+//         url('../fonts/cousine-regular-webfont.svg#cousineregular') format('svg');
+//    font-weight: normal;
+//    font-style: normal;
+//}
+
+$blue: 		#729DD6;
+$purple: 	#C272ED;
+$red: 		#E3422F;
+$green: 	#72EDAD;
+$yellow: 	#CCE36D;

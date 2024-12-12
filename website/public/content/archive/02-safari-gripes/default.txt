@@ -1,0 +1,21 @@
+Title: Safari Gripes
+----
+Subtitle: Or why I use Chrome
+----
+Date: Jun 18, 2010 1:04pm
+----
+Text:
+
+Safari is a great browser. It's incredible that the default browser that comes built-in to an Operating System is so high caliber. However, there are a few annoyances that have existed in Safari for several years now that keep me from using it as my daily, default browser. [Safari 5](http://apple.com/safari), which was released yesterday, managed to address none of them which is frustrating. I [complained](http://twitter.com/josephschmitt/status/15712251140) about this earlier today but I figured I'd elaborate a bit more:
+
+1. No auto-resume last session. Yes, Safari has an option to "Reopen All Windows from Last Session", but that's not what I'm talking about. What I'm talking about is _session_ resuming. What's the difference? It's not enough to just reopen some closed URLs, which Safari does do albeit you have to invoke it manually. It needs to pick up right where I left it: tabs, window sizes, window positions, and even the state of the page I was in, and at the same point where I was scrolled to in that page. Chrome handles this beautifully, and Firefox does a decent job with it (it's slow, sometimes crashes, and I believe it does actually reload the pages sometimes). Google is kicking ass here, Safari needs to catch up.
+
+2. No re-open last closed tab. There's a "Re-open Last Closed Window" but honestly, who the hell uses more than one window anymore? We've switched to using tabs, and sometimes I close a tab that I've been meaning to get to by accident and in Safari I have no way to get back to it quickly. It's even worse if it's a tab you opened a few hours ago, since the history menu sorts by when you opened it, not closed it. Finding it then requires luck and a thorough search of your recent history. Add to that the fact that there's no keyboard shortcut for it the feature is pretty much useless.
+
+3. The magic disappearing close tab button. Here's one that I'm sure felt like it was the right choice, but at least in my case, really annoys me. The close button on tabs in Safari only appears on hover. I may be in the minority here, but this causes me immense confusion when I go to close a tab with the mouse. It might not for you, but it does for me. The way I use a mouse is that I look at my target first, and then I move my mouse to it; this increases accuracy with actually hitting your target on the first attempt. So when I look at the tab I want to close before moving my mouse and I don't see a close button, I get a tiny bit of confusion about where to point my mouse to. Sure, maybe it's a small annoyance, but it's a small annoyance repeated 300 times a day.
+
+4. No favicons in tabs. Favicons make tabs really easy to differentiate so it takes less time to figure out which tab you want. The lack of this definitely makes finding the right tab at a glance much more of a chore than it should be.
+
+5. The shortcut for Command + (1-9) launches bookmarks instead of selecting tabs. This one I'm sure is just what you're used to, but Firefox and TextMate got me used to selecting tabs based on its index number. This means that to select the 2nd tab, I can just hit Command + 2, no matter what tab I'm in, and jump right to it. This is great, and a real time saver! In Safari, however, that launches the 2nd bookmark in your Bookmark Bar (which really confused me at first). This means that to get to the 2nd tab from say the 9th, I have to hit Command + Shift + [ 7 times. Not fun. I switch tabs way more often than I launch Bookmark Bar items, so Firefox's (and Chrome's) behavior makes more sense to me.
+
+As you can probably tell, all of my gripes are relatively minor (and they almost all deal with how tabs or windows are handled) but those annoyances stack up. Get a minor annoyance 800 times a day and all of a sudden it turns into a major one. Safari, especially version 5, has loads of great features, but until most (or preferably all) of these little niggles are fixed, there's no way I'm leaving Chrome.
