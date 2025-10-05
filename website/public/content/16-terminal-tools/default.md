@@ -17,7 +17,7 @@ Over the years, I've built mine into something fast, predictable, and easy to re
 
 Here's what I use, and why it's worth knowing about.
 
-(figure: terminal.jpeg)
+(figure: terminal2.jpeg)
 
 ## Dotfiles + GNU Stow
 
