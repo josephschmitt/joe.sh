@@ -17,6 +17,8 @@ Over the years, I've built mine into something fast, predictable, and easy to re
 
 Here's what I use, and why it's worth knowing about.
 
+(figure: terminal.jpeg)
+
 ## Dotfiles + GNU Stow
 
 Everything starts with [my dotfiles repo](https://github.com/josephschmitt/dotfiles). It's where all my terminal configurations live: shell, editor, Tmux, Git, everything.
