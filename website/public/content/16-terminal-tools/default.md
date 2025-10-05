@@ -1,10 +1,10 @@
-Title: The Tools That Make My Terminal WorK
+Title: The Tools That Make My Terminal Work
 ----
 Short: terminal-tools
 ----
 Subtitle: How a handful of small utilities made my development workflow feel effortless
 ----
-Date: Oct 4, 2025 03:02pm
+Date: October 4, 2025 03:02pm
 ----
 Status: Published
 ----
