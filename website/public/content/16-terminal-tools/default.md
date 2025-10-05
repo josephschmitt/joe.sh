@@ -1,13 +1,14 @@
 Title: The Tools That Make My Terminal Work
 ----
-Short: terminal-tools
+Short: Terminal Tools
 ----
 Subtitle: How a handful of small utilities made my development workflow feel effortless
 ----
-Date: October 4, 2025 03:02pm
+Date: Oct 4, 2025 03:02pm
 ----
 Status: Published
 ----
+
 Text:
 
 At some point, most developers start to care about their terminal setup. It stops being just a place to run commands and becomes part of how you think about your work.
@@ -15,8 +16,6 @@ At some point, most developers start to care about their terminal setup. It stop
 Over the years, I've built mine into something fast, predictable, and easy to reproduce across machines. None of it is particularly complicated, but the tools fit together in a way that makes the whole setup feel cohesive.
 
 Here's what I use, and why it's worth knowing about.
-
-* * *
 
 ## Dotfiles + GNU Stow
 
@@ -115,7 +114,7 @@ For a long time, I didn't really see the point -- typing full paths didn't _feel
 I also use `zoxide query` (aliased to `zq`) constantly. It's like `z`, but instead of changing directories, it returns the full path it matched to. That's perfect for scripts or one-off commands where I want to _use_ a path as a search query without moving into it.
 
 One of the most powerful use cases is parameter expansion. If I want to open Neovim in a specific project, instead of manually `cd`ing into it, I can run something like:
-    
+
 ```bash
     nvim $(zq myproj)
 ```
@@ -186,8 +185,6 @@ Once I select a project, TWM automatically spins up a Tmux session and applies a
 Together, Sesh and TWM handle nearly all of my session and project management. I don't have to remember where things live or how they're configured, I just pick what I want to work on, and everything else falls into place.
 
 It's the final layer that makes my terminal setup feel like a real, integrated environment rather than a collection of separate tools.
-
-* * *
 
 ## Putting It All Together
 
