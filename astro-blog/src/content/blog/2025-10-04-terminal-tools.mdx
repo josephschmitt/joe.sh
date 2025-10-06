@@ -4,7 +4,7 @@ subtitle: "How a handful of small utilities made my development workflow feel ef
 short: "Terminal Tools"
 date: 2025-10-04T04:00:00.000Z
 status: Published
-heroImage: "./images/terminal-tools/hero.jpg"
+heroImage: "/assets/images/blog/terminal-tools/hero.jpg"
 ---
 
 import Figure from '@components/Figure.astro';
@@ -17,7 +17,9 @@ Over the years, I've built mine into something fast, predictable, and easy to re
 
 Here's what I use, and why it's worth knowing about.
 
-<Figure src="terminal2.jpeg)" />. It's where all my terminal configurations live: shell, editor, Tmux, Git, everything.
+<Figure src="/assets/images/blog/terminal-tools/terminal.png" caption="My terminal setup" />
+
+It's where all my terminal configurations live: shell, editor, Tmux, Git, everything.
 
 The reason for having a dedicated repo is simple: these configurations evolve constantly, and being able to version them in Git means I can track changes, experiment safely, and sync them across machines. The tricky part is _where_ those files actually live. Most configuration files belong in your home directory (`~/.zshrc`, `~/.config/nvim/init.lua`, etc.), but you really don't want to make your entire home directory a Git repo.
 

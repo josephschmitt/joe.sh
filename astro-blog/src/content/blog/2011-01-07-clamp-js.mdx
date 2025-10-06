@@ -17,12 +17,12 @@ Recently, while working on some last-minute fixes for the Vimeo HTML player, I r
 I did some research and found [Dave DeSandro's entry](http://dropshado.ws/post/1015351370/webkit-line-clamp) about `-webkit-line-clamp` which, through applying some seemingly unrelated and random CSS styles, does achieve this effect... sort of... most of the time. Here's an example of some properly clamped text in our wonderful video player:
 
 
-<Figure src="working-css-clamp.jpg" caption="Properly clamped text" />
+<Figure src="/assets/images/blog/clamp-js/working-css-clamp.jpg" caption="Properly clamped text" />
 
 
 Great! That works! Well... sort of. Here's what happens if your HTML element just happens to have a link as the last node of the element:
 
-<Figure src="failed-css-clamp.jpg" caption="Failure when there's a link at the end" />
+<Figure src="/assets/images/blog/clamp-js/failed-css-clamp.jpg" caption="Failure when there's a link at the end" />
 
 
 Whoops. It's actually inserting the link from the very end of the paragraph even though it should be getting cut off. As [Dave explained](http://twitter.com/#!/desandro/status/23381458039078912) to me, -webkit-line-clamp is not only vendor-specific, it's completely undocumented and experimental, so it can't really be used reliably.

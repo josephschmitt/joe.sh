@@ -12,17 +12,17 @@ import Heading from '@components/Heading.astro';
 
 I recently discovered a fantastic Mac [Pinboard][pinboard] client called [Shiori][shiori]. It provides a simple, clean, and best of all _fast_ user interface for accessing and adding bookmarks to Pinboard (and Delicious). Bookmark retreival uses a wonderful little UI reminiscient of Alfred/Quicksilver that makes bookmark search ridiculously easy:
 
-<Figure src="shiori-search.png" caption="Search Bookmarks in Shiori" />
+<Figure src="/assets/images/blog/shiori-shortcut/shiori-search.png" caption="Search Bookmarks in Shiori" />
 
 Adding a bookmark is similarly nice, and replaces the functional (yet not always delightful) default Pinboard [bookmarklet][bookmarklet]:
 
-<Figure src="shiori-add.png" caption="Add Bookmark in Shiori" />
+<Figure src="/assets/images/blog/shiori-shortcut/shiori-add.png" caption="Add Bookmark in Shiori" />
 
 However, one feature I really miss from the bookmarklet is the ability to automatically add any selected text on the web page you're saving as the description of the bookmark. This is a huge timesaver for me, as I like pull-quoting large sections of websites and using them as descriptions; makes finding said web sites later on a bit easier. Bummer.
 
 However, after a few minutes in Keyboard Maestro[^1], I was able to whip up a shortcut that gets me exactly what I need:
 
-<Figure src="km-macro.png" caption="Keyboard Maestro Macro" align="left" />
+<Figure src="/assets/images/blog/shiori-shortcut/km-macro.png" caption="Keyboard Maestro Macro" align="left" />
 
 The logic behind the script is actually pretty straightforward.
 

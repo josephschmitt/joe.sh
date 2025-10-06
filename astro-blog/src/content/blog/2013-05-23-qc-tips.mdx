@@ -6,7 +6,7 @@ date: 2013-05-23T04:00:00.000Z
 status: Published
 theme: blue
 code: true
-heroImage: "./images/qc-tips/hero.jpg"
+heroImage: "/assets/images/blog/qc-tips/hero.jpg"
 ---
 
 import Figure from '@components/Figure.astro';
@@ -29,7 +29,7 @@ One of the first challenges I ran into almost immediately after throwing togethe
 
 This is great if you're making VJ visualizations that need to be rendered at arbitrary sizes, but it plays hell with pixel compositions you might be getting out of Photoshop. With a bit of elbow grease you can force QC to recognize pixel units and render everything at its native size, but it comes with a bit of complexity and a couple pitfalls you need to be aware of which we'll get to in a bit. If you're using a Billboard[^1] to render out your image, bring up the Settings Inspector for it (&#x2318;+2) and select "Real Size" for the Dimensions mode. 
 
-<Figure src="real-size.jpg" caption="Real Size Dimensions Mode" />
+<Figure src="/assets/images/blog/qc-tips/real-size.jpg" caption="Real Size Dimensions Mode" />
 
 You should now see your image rendered at its actual pixel dimensions within your composition. However, if you try to change its X and Y values, you'll notice it still takes values in Units, between -1 and 1. What we need to do is take pixel values and convert them to units, and luckily there's a patch for that called Pixels to Units (as well as its opposite, Units to Pixels). Add this patch to your document and connect its Output to the X Input of your Billboard, and then do the same for Y. Now, if you set a pixel value on the Pixels to Units patch, you'll see that this value is converted to QC's native units and applied to the Billboard. Success!
 
@@ -40,11 +40,11 @@ However, as I mentioned before, there are a few pitfalls you need to be aware of
 
 If by now you're thinking it's going to be really annoying to constantly convert pixels to units every time you want to move a Billboard or Sprite around the screen, then you're absolutely right. That's why, whenever possible, you should use a concept well-known by programmers: DRY, Don't Repeat Yourself. One of the easiest ways to do this is to build yourself a macro patch that handles a common situation you'll be running into a lot. For example, here's a macro patch I made called Pixel Sprite, which takes some common properties I use a lot and exposes them for easy use.
 
-<Figure src="pixel-sprite.jpg" caption="The Pixel Sprite" />
+<Figure src="/assets/images/blog/qc-tips/pixel-sprite.jpg" caption="The Pixel Sprite" />
 
 For this macro patch, I've gone ahead and exposed the Inputs for X, Y, Width, and Height in pixels, as well as Alpha and a custom Scale calculation. What's nice about this is now I can expose those properties both through the Input Parameters pane and as Inputs to be modified, as you can see below.
 
-<Figure src="pixel-sprite-parameters.jpg" caption="Pixel Sprite Parameters" />
+<Figure src="/assets/images/blog/qc-tips/pixel-sprite-parameters.jpg" caption="Pixel Sprite Parameters" />
 
 Just remember the caveats from above: your macro patch is expecting values in pixels for X, Y, Width, and Height, so make sure to use that Units to Pixels patch if the output you're getting from another patch is in units (which it would be by default).
 
@@ -94,7 +94,7 @@ function (__number resultingValue, __boolean hasBeenSet) main (__number xPositio
 
 You'll see your JavaScript patch has been updated to reflect how your variables were declared:
 
-<Figure src="javascript-patch.jpg" caption="The JavaScript Patch" />
+<Figure src="/assets/images/blog/qc-tips/javascript-patch.jpg" caption="The JavaScript Patch" />
 
 Put all of this together, and you can combine the functionality of 10 different patches all in one code block of logic, and with things like code comments, have it be 100 times clearer.
 
@@ -107,11 +107,11 @@ If you have a few elements that you want to move as a group, such as a grid of t
 <Heading text="Input Splitters el: h3" id="input-splitters"  />
 Along the lines of the DRY principles. sometimes you have what some call "magic numbers", which are really just static values that happen to work for your current composition, such as an X or Y position of a specific element. If you only need to use this number once, then it's fine to just enter it directly into the Input Parameters palette and be done with it. However, if you want to use it multiple locations or you want to publish that Input so it can be used by the parent patch, then you should look into Input Splitters. Here's an example of using them to store arbitrary values
 
-<Figure src="input-splitters.jpg" caption="Input Splitter Madness" />
+<Figure src="/assets/images/blog/qc-tips/input-splitters.jpg" caption="Input Splitter Madness" />
 
 As you can see, each of the purple patches take a value as an Input. For a lot of those values, they all need to be the same. Instead of clicking on each individual macro patch every time I want to change something like Amplitude, Friction, or Time, I've instead added an Input Splitter, connected it to each macro patch, and now I have one place where I can change the value of that for all of the macro patches at once. Just make sure to go into the Settings Inspector for the splitter (&#x2318;+2) and change the Type from Virtual to whatever type you need (in my example, it would be Number). You can also create an Input Splitter from a pre-existing Input by right-clicking on a patch, selecting Insert Input Splitter, and choosing the Input to split. This also works the same for Outputs.
 
-<Figure src="input-splitter-shortcut.jpg" caption="Input Splitter Shortcut" />
+<Figure src="/assets/images/blog/qc-tips/input-splitter-shortcut.jpg" caption="Input Splitter Shortcut" />
 
 <Heading text="Mathematical Expression el: h3" id="mathematical-expressions"  />
 The JavaScript Patch is fantastic, but sometimes it's overkill, especially if what you're doing in JS can be simplified down to a simple mathematical expression. Enter the Mathematical Expression Patch. While limited to just one line of math instead of JavaScript's infinite potential, it does have one great advantage: any variable you insert into the expression automatically becomes available as an Input using the same name you gave the variable. This is a huge advantage over the JS Patch where all the inputs are simply an element of an array, since you can see what the Input is at a glance. Also, not only can you do normal math operations, but it also supports the `Min()`, `Max()`, `&&`, `||`, and `!` operators. All-in-all, if you just need to compare some values or do simple math, go with this patch over the JavaScript one: it'll save you some headaches later.

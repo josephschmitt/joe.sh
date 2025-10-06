@@ -16,7 +16,7 @@ There's no Tween patch built-in to Quartz Composer, but there is an Interpolatio
 
 (link:Tween.qtz text: My Tween patch) aims to solve both of these problems. It comes with its own Stop Watch patch and time management, and it also remembers its current value. This means that all you need to do is give it a duration, an (optional) interpolation equation, and a value and it'll do the rest. The best part is, you can keep modifying that value, and it'll make sure to tween between the last value you had and the new one, so no need to store previous values. Just pass it the new ones and it'll figure it out.
 
-<Figure src="tween-patch.png" />
+<Figure src="/assets/images/blog/qc-tween/tween-patch.png" />
 
 I've already started using this in a project and it seems to be working pretty well, but I'd appreciate it if you guys could let me know of any issues you run into while using this patch. I think you'll find it's pretty useful for adding animation to properties without using inertia (especially for values where inertia doesn't make sense, like Alpha).
 
