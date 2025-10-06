@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Publish mode - require editorial workflow (draft/review/ready)
+publish_mode: editorial_workflow
+
+# Media files configuration
+media_folder: "public/assets/images/blog"
+public_folder: "/assets/images/blog"
+
+# Collections configuration
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: "frontmatter"
+    extension: "mdx"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "text", required: false }
+      - { label: "Short Title", name: "short", widget: "string", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Status", name: "status", widget: "select", options: ["Published", "Draft"], default: "Draft" }
+      - { label: "Theme", name: "theme", widget: "select", options: ["blue", "purple", "red", "green", "yellow", "white", "gray", "darkblue"], required: false }
+      - { label: "Code Highlighting", name: "code", widget: "boolean", default: false, required: false }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

@@ -1,7 +1,7 @@
 website/log
+node_modules/
 
 # Astro
-astro-blog/node_modules/
 astro-blog/dist/
 astro-blog/.astro/
 astro-blog/.env
