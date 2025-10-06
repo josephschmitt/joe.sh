@@ -6,3 +6,6 @@ astro-blog/dist/
 astro-blog/.astro/
 astro-blog/.env
 astro-blog/.netlify/
+
+# macOS
+.DS_Store
