@@ -1,30 +1,30 @@
 ---
 import Logo from './Logo.astro';
-import { formatDate } from '@utils/date';
 
 interface Props {
   title: string;
   subtitle?: string;
-  date: Date;
   heroImage?: string;
   theme?: string;
 }
 
-const { title, subtitle, date, heroImage, theme } = Astro.props;
+const { title, subtitle, heroImage, theme } = Astro.props;
+
+const headerClass = [
+  theme || '',
+  heroImage ? 'hero' : ''
+].filter(Boolean).join(' ');
+
+const headerStyle = heroImage 
+  ? `background-image: url(${heroImage});` 
+  : '';
 ---
 
-<header class="article-header">
+<header class={headerClass} style={headerStyle}>
   <Logo />
   
-  {heroImage && (
-    <div class="hero-image">
-      <img src={heroImage} alt={title} />
-    </div>
-  )}
-  
-  <div class="article-meta">
+  <hgroup class={heroImage ? '' : 'column'}>
     <h1>{title}</h1>
     {subtitle && <h2>{subtitle}</h2>}
-    <time datetime={date.toISOString()}>{formatDate(date)}</time>
-  </div>
+  </hgroup>
 </header>

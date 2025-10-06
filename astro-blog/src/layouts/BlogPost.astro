@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import ArticleHeader from '@components/ArticleHeader.astro';
 import Footer from '@components/Footer.astro';
-import { formatDate } from '@utils/date';
+import { getMonth, getDay, getYear } from '@utils/date';
 
 interface Props {
   title: string;
@@ -14,19 +14,28 @@ interface Props {
 }
 
 const { title, subtitle, date, heroImage, theme, code } = Astro.props;
+
+// Format date parts for timestamp
+const month = getMonth(date);
+const day = getDay(date);
+const year = getYear(date);
 ---
 
 <BaseLayout title={title} description={subtitle}>
   <ArticleHeader 
     title={title} 
     subtitle={subtitle} 
-    date={date}
     heroImage={heroImage}
     theme={theme}
   />
   
   <section class="column content">
     <article>
+      <a class="timestamp" href={`#${title}`}>
+        <span class="month">{month}</span>
+        <span class="day">{day}</span>
+        <span class="year">{year}</span>
+      </a>
       <slot />
     </article>
     
