@@ -19,7 +19,9 @@ Here's what I use, and why it's worth knowing about.
 
 <Figure src="/assets/images/blog/terminal-tools/terminal.png" caption="My terminal setup" />
 
-It's where all my terminal configurations live: shell, editor, Tmux, Git, everything.
+## Dotfiles + GNU Stow
+
+Everything starts with [my dotfiles repo](https://github.com/josephschmitt/dotfiles). It's where all my terminal configurations live: shell, editor, Tmux, Git, everything.
 
 The reason for having a dedicated repo is simple: these configurations evolve constantly, and being able to version them in Git means I can track changes, experiment safely, and sync them across machines. The tricky part is _where_ those files actually live. Most configuration files belong in your home directory (`~/.zshrc`, `~/.config/nvim/init.lua`, etc.), but you really don't want to make your entire home directory a Git repo.
 
