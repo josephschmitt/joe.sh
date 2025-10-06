@@ -1,1 +1,8 @@
 website/log
+
+# Astro
+astro-blog/node_modules/
+astro-blog/dist/
+astro-blog/.astro/
+astro-blog/.env
+astro-blog/.netlify/
