@@ -1,1 +1,4 @@
 website/log
+
+# macOS
+.DS_Store
