@@ -55,24 +55,31 @@ In my opinion, this is the most powerful patch in all of Quartz Composer and is 
 
 The first concept to wrap our heads around with the JavaScript patch is how you get values in and out of it. When you first add it to your composition, you'll notice it has two inputs and one output (we'll get to how to change these later). Bring up the Settings Inspector (&#x2318;+2) for the patch, and you'll see where you can start writing your JavaScript code. Most of the code you'll write goes inside the `main` function declaration that you see already written in the patch. The inputs are accessed via the `inputNumber` object declared in the function, with code like this:
 
-<pre><code data-language="javascript">var myFirstInput = inputNumber[0];
+```
+var myFirstInput = inputNumber[0];
 var mySecondInput = inputNumber[1];
-</code></pre>
+
+```
 
 You don't have to store them in separate variables, you can change them directly. This is just a silly example to give you an idea of how it works. Next, how do you change what comes out of the patch as an output? We simply create a `result` object, set the property to contain the output we need, and return it in the `main` function. In this case, our output is called `outputNumber`:
 
-<pre><code data-language="javascript">var result = new Object();
+```
+var result = new Object();
 result.outputNumber = inputNumber[0] + inputNumber[1];
 return result;
-</code></pre>
+
+```
 
 That's it! You should now be taking 2 inputs, acting upon them in some way (the example just adds them together), and then returning an output. But what if you want more than just 2 inputs, or more than just one output? That's where the function declaration I mentioned in the beginning comes into play:
 
-<pre><code data-language="javascript">function (__number outputNumber) main (__number inputNumber[2])</code></pre>
+```
+function (__number outputNumber) main (__number inputNumber[2])
+```
 
 There are 3 parts to this declaration that are very important. The first, is the `__number` part that precedes both the input and out numbers. As explained in the comment above the function, those are special indicators which allow you to specify what Type your inputs and outputs should have. They can be booleans, strings, numbers, etc. If you want it to be any kind of input or output, you can set it to `__virtual`. The next two important areas are `outputNumber` and `inputNumber`. These are objects that control how values are funneled in to and out of your patch. Want more than one output? Then simply turn the outputNumber object into an array and give it a length, such as `outputNumber[2]`. Now you should have two outputs show up in your patch, `outputNumber[0]` and `outputNumber[1]`. Want to use a different variable for your inputs other than inputNumber? Simply change it. You can even use different variable names instead of an array of objects, and give each a different type, just separate them with a comma:
 
-<pre><code style="min-width: 820px;" data-language="javascript">function (__number resultingValue, __boolean hasBeenSet) main (__number xPosition, __number yPosition)
+```
+function (__number resultingValue, __boolean hasBeenSet) main (__number xPosition, __number yPosition)
 {
     var result = new Object();
 
@@ -82,7 +89,8 @@ There are 3 parts to this declaration that are very important. The first, is the
     result.hasBeenSet = true; 
 
     return result;
-}</code></pre>
+}
+```
 
 You'll see your JavaScript patch has been updated to reflect how your variables were declared:
 

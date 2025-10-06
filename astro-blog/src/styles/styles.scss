@@ -1,0 +1,579 @@
+@import 'common.scss';
+@import url(http://fonts.googleapis.com/css?family=Cousine);
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+html {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	font-size: 10px;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 1.6rem;
+	line-height: 2.6rem;
+	background: #fff;
+	color: #777;
+}
+
+.column {
+	margin: 0 auto 0;
+	padding: 0 15px;
+	max-width: 740px;
+}
+
+a {
+	color: $blue;
+	text-decoration: none;
+	font-style: normal;
+}
+
+a,
+a:hover,
+a:active,
+a:visited {
+	outline: 0px;
+}
+
+a:hover {
+	color: #333;
+}
+
+img {
+	outline: 0;
+	border: 0;
+}
+
+h1 {
+	font-size: 1.8em;
+	line-height: 1.1em;
+	color: #222;
+	margin-bottom: 20px;
+}
+
+h2 {
+	font-size: 1.5em;
+	font-weight: normal;
+	color: $blue;
+	margin-bottom: .75em;
+}
+
+h3 {
+	font: {
+		weight: normal;
+		size: 1.0em;
+		family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
+	}
+
+	color: #222;
+	margin-bottom: 0em; 
+}
+
+h4 {
+	color: $blue;
+	font-weight: normal;
+}
+
+h1, h2 {
+	p {
+		margin: 0;
+	}
+}
+
+p {
+	margin-bottom: 1.25em;
+}
+
+blockquote {
+	margin-left: 1em;
+	padding-left: 1em;
+	border-left: 5px solid #eee;
+}
+
+em {
+	font: {
+		family: "HelveticaNeue-Italic", "Helvetica Neue Italic", Helvetica, sans-serif;
+		style: italic;
+	}
+}
+
+strong {
+	font: {
+		family: "HelveticaNeue-Bold", "Helvetica Neue Bold", Helvetica, sans-serif;
+		weight: bold;
+		style: normal;
+	}
+}
+
+pre {
+	border: 1px solid #dddddd;
+}
+
+code {
+	margin: 0 2px;
+	padding: 0px 5px;
+	border-radius: 3px;
+	font: {
+		size: 0.9em;
+		family: 'Cousine', monospace;
+	}
+}
+
+hgroup {
+	margin-bottom: 3em;
+}
+
+#forkme {
+	position: absolute; 
+	top: 0; 
+	right: 0; 
+	border: 0;
+	z-index: 1;
+}
+
+h1.logo {
+	text-align: center;
+	padding-top: 10px;
+	margin-bottom: 2.5em;
+
+	a {
+		color: #666;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, sans-serif;
+		font-weight: normal;
+		line-height: 1.8em;
+
+		.icon {
+			color: $blue;
+			font-family: 'icons';
+			font-size: 1.8em;
+			vertical-align: middle;
+			position: relative;
+
+			background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 65%, rgba(255,255,255,0) 65%); /* FF3.6+ */
+			background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 65%,rgba(255,255,255,0) 65%); /* Chrome10+,Safari5.1+ */
+			background: radial-gradient(ellipse at center, rgba(255,255,255,1) 65%,rgba(255,255,255,0) 65%); /* W3C */
+			background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 67%,rgba(255,255,255,0) 67%) 0 3px; /* IE10+ */
+
+			background-repeat: no-repeat;
+		}
+	}
+}
+
+header {
+	position: relative;
+
+	hgroup h1 {
+		padding-bottom: .3em;
+		margin-bottom: .3em;
+		border-bottom: 1px solid #eee;
+	}
+
+	&.hero {
+		position: relative;
+		height: 30em;
+		background: {
+			color: #1D1F21;
+			repeat: none;
+			position: center center;
+			size: cover;
+		}
+
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-box-pack: center;
+
+		display: -moz-box;
+		-moz-box-orient: vertical;
+		-moz-box-pack: center;
+
+		display: -ms-flexbox;
+		-ms-flex-direction: column;
+		-ms-flex-pack: center;
+
+		display: box;
+		box-orient: vertical;
+		box-pack: center;
+
+		& > * {
+			position: relative;
+			z-index: 1;
+		}
+
+		&:after {
+			content: '';
+			background: rgba(0, 0, 0, 0.5);
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		/* Themes */
+		&.purple h2,
+		&.purple .logo .icon,
+		&.purple a {
+			color: $purple;
+		}
+
+		&.red h2,
+		&.red .logo .icon,
+		&.red a {
+			color: $red;
+		}
+
+		&.green h2,
+		&.green .logo .icon,
+		&.green a {
+			color: $green;
+		}
+
+		&.yellow h2,
+		&.yellow .logo .icon,
+		&.yellow a {
+			color: $yellow;
+		}
+
+		h1.logo {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			
+			a {
+				color: #fff;
+			}
+		}
+
+		hgroup h1, hgroup h2, & > p {
+			text-shadow: 0 2px 2px rgba(0,0,0,0.75);
+		}
+
+		hgroup {
+			text-align: center;
+			margin-bottom: 0;
+
+			h1, h2 {
+				line-height: 1em;
+				margin-left: 1em;
+				margin-right: 1em;
+			}
+
+			h1 {
+				color: #fff;
+				font-size: 2.5em;
+				margin-bottom: 0.1em;
+				border: 0;
+				padding: 0;
+			}
+
+			h2 {
+				a {
+					font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium', Helvetica, sans-serif;
+					text-decoration: underline;
+				}
+			}
+		}
+
+		& > p {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			color: rgba(255, 255, 255, 0.5);
+			text-align: center;
+			line-height: 1.3em;
+			margin-bottom: 0.8em;
+			font: {
+				family: "HelveticaNeue-Medium", "Helvetica Neue Medium", Helvetica, sans-serif;
+				size: 0.8em !important;
+			}
+
+			a:hover {
+				color: #fff;
+			}
+		}
+	}
+}
+
+.timestamp {
+	text-transform: uppercase;
+	line-height: 2.5em;
+	font: {
+		family: "HelveticaNeue-Medium";
+		style: normal;
+	}
+	
+	position: relative;
+	top: 5px;
+	height: 45px;
+	width: 50px;
+	display: block;
+	float: left;
+	margin-right: 15px;
+	
+	.month {
+		-webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+		font-family: 'Cousine', monospace;
+		font-size: 1.2em;
+		position: absolute;
+		left: -12px;
+		top: 0px;
+		width: 2em;
+		letter-spacing: 0.13em;
+	}
+	
+	.day {
+		font-size: 2.1em;
+		text-align: right;
+		position: absolute;
+		top: -8px;
+		left: 17px;
+		width: 34px;
+	}
+	
+	.year {
+		font-size: 0.8em;
+		letter-spacing: 0.2em;
+		position: absolute;
+		top: 15px;
+		left: 18px;
+		text-align: right;
+		width: 34px;
+	}
+}
+
+nav {
+	font-size: 1.2em;
+	line-height: 1.8em;
+
+	ul {
+		list-style: none;
+	}
+
+	li {
+		line-height: 1.2em;
+		margin-bottom: 20px;
+
+		a {
+			font-weight: 500;
+
+			&.draft:before {
+				content: 'Draft';
+				text-transform: uppercase;
+				font-size: 0.5em;
+				line-height: 1.2em;
+				color: $blue;
+				border: 1px solid $blue;
+				background: #cfe2fa;
+				border-radius: 2px;
+				padding: 1px 2px;
+				margin-right: 5px;
+				position: relative;
+				top: -3px;
+			}
+		}
+
+		em {
+			display: block;
+			font-size: 0.9em;
+		}
+	}
+}
+
+section.content {
+	margin-top: 3em;
+
+	article h2 {
+		margin-top: 1.5em;
+	}
+
+	article h3 a {
+		color: inherit !important;
+	}
+	
+	article img {
+		max-width: 100%;
+	}
+
+	ul, ol {
+		@extend p;
+		padding-left: 20px;
+	}
+	
+	ol ol {
+		list-style-type: lower-latin;
+	}
+	
+	br + br + ol, br + br + ul {
+		margin-top:	-2.6rem;
+	}
+
+	p img {
+		width: 100%;
+	}
+
+	sup {
+		line-height: 0;
+		padding: 0 0 0 .2em;
+	}
+
+	aside {
+		margin-top: 3em;
+	}
+}
+
+.footnotes {
+	margin-top: 2em;
+
+	hr {
+		margin-bottom: 2em;
+		border-width: 1px 0 0 0;
+		border-color: #eee;
+		border-style: solid;
+	}
+}
+
+footer {
+	margin: 7em 0 1em;
+	font-size: 13px;
+	color: #999;
+	text-align: center;
+
+	p {
+		margin: 0;
+	}
+
+	a {
+		color: $blue;
+	}
+
+	a:hover {
+	  color: #222;
+	}
+
+	li {
+		display: inline-block;
+
+		&:before {
+			content: '|';
+			padding: 0 5px;
+		}
+
+		&:first-child:before {
+			content: ''
+		}
+	}
+}
+
+#home {
+	margin-top: 80px;
+
+	h1 {
+		font-size: 2.5em;
+		margin-bottom: 0.25em;
+	}
+
+	h3 {
+		font: {
+			family: "HelveticaNeue-Italic", "Helvetica Neue Italic", Helvetica, sans-serif;
+			style: italic;
+		}
+		color: #999;
+	}
+
+	nav {
+		margin-top: 120px;
+	}
+}
+
+.fit-wrapper {
+	position: relative;
+	height: 0;
+
+	& > * {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+/** Reversed out link colors **/
+nav li a, section.content h1 a {
+	color: #222;
+}
+
+header h1 a:hover, nav li a:hover, section.content h1 a:hover {
+	color: $blue;
+}
+
+
+@media screen and (max-width: 400px) {
+	#forkme {
+		display: none;
+	}
+}
+
+@media screen and (max-height: 600px) {
+	.logo {
+		font-size: 1.5em !important;
+	}
+
+	header {
+		&.hero {
+			height: 20em;
+		}
+	}
+
+	hgroup {
+		margin-bottom: 1.5em;
+
+		h1, h2 {
+			line-height: 1.1em !important;
+		}
+
+		h1 {
+			font-size: 1.7em !important;
+			margin-bottom: 0.3em !important;
+		}
+
+		h2 {
+			font-size: 1.1em;
+		}
+	}
+
+	h2 {
+		font-size: 1.4em;
+	}
+
+	section.content {
+		margin-top: 30px;
+	}
+}
+
+.video-container {
+	@extend p;
+	width: 100%;
+	position: relative;
+
+	$padding: 9/16*100%;
+	padding: ($padding) 0 0 0;
+
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}

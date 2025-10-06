@@ -1,16 +1,36 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Logo from '@components/Logo.astro';
 
+const posts = (await getCollection('blog'))
+  .filter(post => post.data.status === 'Published')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Hi, I'm Joe Schmitt">
+  <header>
+    <Logo />
+  </header>
+  
+  <section id="home" class="column">
+    <hgroup>
+      <h1>Hi, my name is Joe</h1>
+      <h3>
+        I build things with my mind at <a href="https://compass.com">Compass</a>. 
+        Formerly, I made things <a href="http://madeforhumans.com">for humans</a>. 
+        Before that, at <a href="http://vimeo.com">Vimeo</a> I helped make iframes fun again.
+      </h3>
+    </hgroup>
+    
+    <nav>
+      <ul>
+        {posts.map(post => (
+          <li>
+            <a href={`/${post.slug}/`}>{post.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>

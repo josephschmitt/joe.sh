@@ -11,7 +11,8 @@ One of our greatest concerns while working on the new [HTML Player](http://vimeo
 
 Now, there are many, many *many* things that we did to bring our video player source code to its svelte ~25k, but one of the techniques was to be extremely precise in scope for our class methods. Below you can see some stubbed-out code that illustrates the three different types of class methods we used: Private, Privileged, and Public.
 
-<pre><code style="min-width: 630px;" data-language="javascript">var MethodScopeExample = new Class({
+```javascript
+var MethodScopeExample = new Class({
     initialize: function() {
         var self = this,
             myPrivateVariable = "private";
@@ -34,7 +35,7 @@ Now, there are many, many *many* things that we did to bring our video player so
         console.log('private var:', myPrivateVariable); //undefined
     }
 });
-</code></pre>
+```
 
 ## Private Methods
 
