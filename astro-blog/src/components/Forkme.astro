@@ -1,0 +1,22 @@
+---
+interface Props {
+  repo?: string;
+  ribbon?: 'lightblue' | 'purple' | 'red' | 'green' | 'yellow' | 'white' | 'gray' | 'darkblue';
+}
+
+const { repo = 'josephschmitt', ribbon = 'lightblue' } = Astro.props;
+const ribbonMap = {
+  lightblue: 'forkme_right_lightblue_729dd6.png',
+  purple: 'forkme_right_purple_C272ED.png',
+  red: 'forkme_right_red_E3422F.png',
+  green: 'forkme_right_green_72EDAD.png',
+  yellow: 'forkme_right_yellow_CCE36D.png',
+  white: 'forkme_right_white_ffffff.png',
+  gray: 'forkme_right_gray_6d6d6d.png',
+  darkblue: 'forkme_right_darkblue_121621.png',
+};
+---
+
+<a id="forkme" href={`https://github.com/${repo}`}>
+  <img src={`/assets/images/gh_ribbons/${ribbonMap[ribbon]}`} alt="Fork me on GitHub">
+</a>

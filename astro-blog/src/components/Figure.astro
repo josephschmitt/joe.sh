@@ -1,0 +1,21 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+  caption?: string;
+  align?: 'left' | 'center' | 'right';
+  width?: string;
+  maxWidth?: string;
+}
+
+const { src, alt, caption, align = 'center', width, maxWidth } = Astro.props;
+const style = [
+  width && `width: ${width}`,
+  maxWidth && `max-width: ${maxWidth}`,
+].filter(Boolean).join('; ');
+---
+
+<figure style={`text-align: ${align}`}>
+  <img src={src} alt={alt || caption || ''} style={style} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

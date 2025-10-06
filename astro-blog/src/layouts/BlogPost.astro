@@ -1,0 +1,41 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ArticleHeader from '@components/ArticleHeader.astro';
+import Footer from '@components/Footer.astro';
+import { formatDate } from '@utils/date';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  date: Date;
+  heroImage?: string;
+  theme?: string;
+  code?: boolean;
+}
+
+const { title, subtitle, date, heroImage, theme, code } = Astro.props;
+---
+
+<BaseLayout title={title} description={subtitle}>
+  <ArticleHeader 
+    title={title} 
+    subtitle={subtitle} 
+    date={date}
+    heroImage={heroImage}
+    theme={theme}
+  />
+  
+  <section class="column content">
+    <article>
+      <slot />
+    </article>
+    
+    <aside>
+      <p>Questions or comments? <a href={`https://twitter.com/intent/tweet?screen_name=josephschmitt&text=Re%3A%20${encodeURIComponent(title)}`}>Ping me on Twitter</a></p>
+    </aside>
+  </section>
+  
+  <Footer />
+</BaseLayout>
+
+{code && <link rel="stylesheet" href="/assets/styles/themes/tomorrow.css">}

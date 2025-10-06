@@ -1,0 +1,30 @@
+---
+import Logo from './Logo.astro';
+import { formatDate } from '@utils/date';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  date: Date;
+  heroImage?: string;
+  theme?: string;
+}
+
+const { title, subtitle, date, heroImage, theme } = Astro.props;
+---
+
+<header class="article-header">
+  <Logo />
+  
+  {heroImage && (
+    <div class="hero-image">
+      <img src={heroImage} alt={title} />
+    </div>
+  )}
+  
+  <div class="article-meta">
+    <h1>{title}</h1>
+    {subtitle && <h2>{subtitle}</h2>}
+    <time datetime={date.toISOString()}>{formatDate(date)}</time>
+  </div>
+</header>

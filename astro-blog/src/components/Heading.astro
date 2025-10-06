@@ -1,0 +1,14 @@
+---
+interface Props {
+  level?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  id: string;
+  text: string;
+}
+
+const { level = 'h2', id, text } = Astro.props;
+const Tag = level;
+---
+
+<Tag id={id}>
+  <a href={`#${id}`}>{text}</a>
+</Tag>
