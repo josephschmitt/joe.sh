@@ -2,7 +2,7 @@
 
 ## Voice and Tone
 
-These blog posts are written in first person by a senior software engineer writing for other developers. The tone is conversational and confident without being showy. Think "explaining something interesting to a friend who's also technical" rather than "writing documentation" or "pitching a product."
+These blog posts are written in first person by a principal software engineer writing for other developers. The tone is conversational and confident without being showy. Think "explaining something interesting to a friend who's also technical" rather than "writing documentation" or "pitching a product."
 
 ### Sentence Structure
 
