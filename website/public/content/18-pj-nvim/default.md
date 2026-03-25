@@ -1,6 +1,6 @@
 Title: pj - A Smarter Project Finder
 ----
-Short: pj.nvim
+Short: pj
 ----
 Subtitle: Project finder that discovers projects automatically, including nested ones in monorepos
 ----
