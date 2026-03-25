@@ -48,7 +48,7 @@ Short: Short Slug
 ----
 Subtitle: One-line description of the post
 ----
-Date: Mon DD, YYYY
+Date: Mon DD, YYYY HH:MMam/pm
 ----
 Status: Published
 ----
@@ -56,7 +56,7 @@ Status: Published
 Text:
 ```
 
-Required fields: Title, Short, Subtitle, Date, Status. The `Text:` marker begins the body.
+Required fields: Title, Short, Subtitle, Date, Status. The `Text:` marker begins the body. The Date field **must** include a time component (e.g., `Feb 2, 2026 12:00pm`) or the post won't appear on the home page.
 
 ### Directory Convention
 

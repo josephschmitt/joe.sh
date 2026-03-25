@@ -4,7 +4,7 @@ Short: pj
 ----
 Subtitle: Project finder that discovers projects automatically, including nested ones in monorepos
 ----
-Date: Feb 2, 2026
+Date: Feb 2, 2026 12:00pm
 ----
 Status: Published
 ----

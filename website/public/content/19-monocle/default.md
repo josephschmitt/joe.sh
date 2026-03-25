@@ -4,7 +4,7 @@ Short: Monocle
 ----
 Subtitle: A terminal UI for reviewing AI-generated code as it's written, powered by MCP channels
 ----
-Date: Mar 25, 2026
+Date: Mar 25, 2026 5:08pm
 ----
 Status: Published
 ----
