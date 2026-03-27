@@ -11,8 +11,6 @@ Status: Published
 
 Text:
 
-(figure: hero.png alt: Monocle reviewing code changes in real time alongside Claude Code)
-
 The more I use AI coding agents, the more I realize that the weakest part of the workflow isn't the code generation. It's the review. The agent writes something, you get a diff, and then you're left choosing between a few unsatisfying options: rubber-stamp it and hope for the best, copy-paste your feedback into a chat window and wait for the next iteration, or just accept that you're going to miss things because the friction of reviewing is too high.
 
 None of those feel right. Code review exists for a reason, and the fact that the code was written by an AI doesn't make it less important to review. If anything, it makes it _more_ important. But the tooling hasn't caught up. There's no equivalent of a GitHub PR review for code that an agent is writing in real time, right in front of you.
