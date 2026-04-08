@@ -11,9 +11,11 @@ Status: Draft
 
 Text:
 
-A couple of weeks ago I [first shared details](https://joe.sh/monocle) about a TUI I was working on called [Monocle](https://github.com/josephschmitt/monocle). Monocle was built to review the code your AI agent produces, but what I was most excited about was how I was using (abusing?) the brand new [MCP channels](https://code.claude.com/docs/en/channels-reference) to make the experience seamless. Unfortunately, in my excitement I failed to make a compelling case for why _you_ should care about this tool, and I also failed to make sure it was feature-complete and had broad appeal.
+A couple of weeks ago I [first shared details](https://joe.sh/monocle) about a TUI I was working on called [Monocle](https://github.com/josephschmitt/monocle). Monocle was built to review the code your AI agent produces, but what I was most excited about was how I was using (abusing?) the brand new [MCP channels](https://code.claude.com/docs/en/channels-reference) to make the experience seamless. Unfortunately, in my excitement I failed to make a compelling case for why _you_ should care about this tool. And by leading with MCP channels, which are a Claude Code-only feature in research preview, I accidentally made Monocle seem like a Claude Code-only tool.
 
-Today I'm hoping to fix both of those things and do a better job convincing you that Monocle is the tool you didn't know you were missing.
+Neither of those things is true, and I've spent the last couple of weeks making sure the tool reflects that. Monocle now integrates with any AI coding agent that supports MCP tools or agent skills, with official support for Claude Code, OpenAI Codex, Gemini CLI, and OpenCode. The MCP channel integration is still there as a nice-to-have for Claude Code users, but it's no longer the whole story.
+
+Today I'm hoping to do a better job convincing you that Monocle is the tool you didn't know you were missing.
 
 ## The Problem
 
@@ -53,9 +55,11 @@ It's a small workflow improvement on paper, but in practice it has completely ch
 
 ## Works With Your Agent
 
-If you're not a Claude Code user, or you're just not interested in enabling preview features with flags that start with the word "dangerously," Monocle works fine with any agent that supports skills or MCP tools.
+One of the biggest things I wanted to fix since the first announcement was making Monocle work with more than just Claude Code. The original version was tightly coupled to MCP channels, which meant it was effectively a Claude Code-only tool. That's no longer the case.
 
-Monocle integrates with agents through two modes: [MCP tools](https://docs.getmonocle.sh/concepts/agent-integration) and [skills](https://agentskills.io). MCP tools mode runs a built-in MCP server that exposes review operations as tools the agent can call directly, while skills mode installs instruction files that teach the agent which `monocle review` CLI commands to run. Both expose the same operations, and you can switch between them depending on what your agent supports best. Claude Code defaults to MCP tools, while OpenCode, Codex CLI, and Gemini CLI default to skills. As long as your agent supports either approach it will probably work with Monocle. You'll just need to manually ask your agent to retrieve your feedback once you've submitted it, instead of getting the direct notification flow that MCP channels provide.
+Monocle now integrates with agents through two modes: [MCP tools](https://docs.getmonocle.sh/concepts/agent-integration) and [skills](https://agentskills.io). MCP tools mode runs a built-in MCP server that exposes review operations as tools the agent can call directly, while skills mode installs instruction files that teach the agent which `monocle review` CLI commands to run. Both expose the same operations, and you can switch between them depending on what your agent supports best. Claude Code defaults to MCP tools, while OpenCode, Codex CLI, and Gemini CLI default to skills. As long as your agent supports either approach it will probably work with Monocle.
+
+Without MCP channels, you'll need to manually ask your agent to retrieve your feedback once you've submitted it, instead of getting the automatic notification. But that's the only difference. You still get the full review interface, the structured feedback, the line-level commenting, the plan review, all of it. The channel integration is a nice workflow polish, but the core value of Monocle doesn't depend on it.
 
 All communication with Monocle happens over local Unix sockets, so everything stays private and on your machine without exposing any ports to the outside world.
 
