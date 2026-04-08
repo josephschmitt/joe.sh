@@ -13,7 +13,7 @@ Text:
 
 A couple of weeks ago I [first shared details](https://joe.sh/monocle) about a TUI I was working on called [Monocle](https://github.com/josephschmitt/monocle). Monocle was built to review the code your AI agent produces, but what I was most excited about was how I was using (abusing?) the brand new [MCP channels](https://code.claude.com/docs/en/channels-reference) to make the experience seamless. Unfortunately, in my excitement I failed to make a compelling case for why _you_ should care about this tool. And by leading with MCP channels, which are a Claude Code-only feature in research preview, I accidentally made Monocle seem like a Claude Code-only tool.
 
-Neither of those things is true, and I've spent the last couple of weeks making sure the tool reflects that. Monocle now integrates with any AI coding agent that supports MCP tools or agent skills, with official support for Claude Code, OpenAI Codex, Gemini CLI, and OpenCode. The MCP channel integration is still there as a nice-to-have for Claude Code users, but it's no longer the whole story.
+Monocle now integrates with any AI coding agent that supports MCP tools or agent skills, with official support for Claude Code, OpenAI Codex, Gemini CLI, and OpenCode. The MCP channel integration is still there as a nice-to-have for Claude Code users, but it's no longer the whole story.
 
 Today I'm hoping to do a better job convincing you that Monocle is the tool you didn't know you were missing.
 
