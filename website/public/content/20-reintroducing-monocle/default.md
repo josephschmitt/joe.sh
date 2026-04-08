@@ -6,7 +6,7 @@ Subtitle: The case I should have made the first time around
 ----
 Date: Apr 7, 2026 8:00pm
 ----
-Status: Draft
+Status: Published
 ----
 
 Text:
