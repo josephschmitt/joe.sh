@@ -53,7 +53,7 @@ It's a small workflow improvement on paper, but in practice it has completely ch
 
 ## Works With Your Agent
 
-If you're not a Claude Code user, or you're just not interested in enabling preview features with flags that start with the word "dangerously," Monocle works fine with any agent that supports skills or bash tools.
+If you're not a Claude Code user, or you're just not interested in enabling preview features with flags that start with the word "dangerously," Monocle works fine with any agent that supports skills or MCP tools.
 
 Monocle integrates with agents through two modes: [MCP tools](https://docs.getmonocle.sh/concepts/agent-integration) and [skills](https://agentskills.io). MCP tools mode runs a built-in MCP server that exposes review operations as tools the agent can call directly, while skills mode installs instruction files that teach the agent which `monocle review` CLI commands to run. Both expose the same operations, and you can switch between them depending on what your agent supports best. Claude Code defaults to MCP tools, while OpenCode, Codex CLI, and Gemini CLI default to skills. As long as your agent supports either approach it will probably work with Monocle. You'll just need to manually ask your agent to retrieve your feedback once you've submitted it, instead of getting the direct notification flow that MCP channels provide.
 
