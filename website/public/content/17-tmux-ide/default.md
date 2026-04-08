@@ -137,4 +137,4 @@ The traditional IDE assumes the editor is the center of everything. In a world w
 
 ---
 
-The full configuration is available in [my dotfiles repo](https://github.com/josephschmitt/dotfiles). If you have questions or want to talk terminal workflows, [find me on Twitter](https://twitter.com/intent/tweet?screen_name=josephschmitt&text=Re%3A%20Tmux%20is%20My%20IDE).
+The full configuration is available in [my dotfiles repo](https://github.com/josephschmitt/dotfiles). If you have questions or want to talk terminal workflows, find me on [Mastodon](https://hachyderm.io/@josephschmitt), [Bluesky](https://bsky.app/profile/joe.sh), or [X](https://x.com/josephschmitt).

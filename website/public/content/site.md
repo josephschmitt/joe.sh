@@ -8,6 +8,8 @@ Keywords: Joseph Schmitt, Joe Schmitt, Vimeo, Made for Humans, Web Development, 
 ----
 Copyright: © 2010-(date: Year) (link: http://joe.sh text: Joseph Schmitt)
 ----
-Twitter: http://twitter.com/josephschmitt
+Mastodon: https://hachyderm.io/@josephschmitt
 ----
-ADN: http://alpha.app.net/josephschmitt
+Bluesky: https://bsky.app/profile/joe.sh
+----
+Twitter: https://x.com/josephschmitt
