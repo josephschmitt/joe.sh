@@ -14,9 +14,9 @@ These blog posts are written in first person by a principal software engineer wr
 
 ### Em Dashes
 
-Use em dashes (`--` in these posts) sparingly. One or two per section is fine for a genuine aside or parenthetical. Do NOT use them as a crutch to glue short clauses together. If you find yourself using `--` more than twice in a paragraph, rewrite with commas, colons, semicolons, or by restructuring the sentence.
+Use em dashes (`&mdash;` in these posts, which renders as —) sparingly. One or two per section is fine for a genuine aside or parenthetical. Do NOT use them as a crutch to glue short clauses together. If you find yourself using `&mdash;` more than twice in a paragraph, rewrite with commas, colons, semicolons, or by restructuring the sentence. For en dashes (ranges, etc.), use `&ndash;`.
 
-- BAD: "It handles the basics -- staging, committing, pushing -- but also the advanced stuff -- rebases, hunks, stashes -- without touching the mouse."
+- BAD: "It handles the basics &mdash; staging, committing, pushing &mdash; but also the advanced stuff &mdash; rebases, hunks, stashes &mdash; without touching the mouse."
 - GOOD: "It handles the basics like staging, committing, and pushing, but also makes the advanced stuff easy. Interactive rebases, staging individual hunks, managing stashes, switching branches: all of it's just a few keystrokes away."
 
 ### Things to Avoid
