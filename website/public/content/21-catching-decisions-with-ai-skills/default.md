@@ -13,7 +13,7 @@ Text:
 
 I tend to bounce around to lots of ideas at once, and these days almost all of my ideating and thinking out loud happens in conversations with AI like Claude. Between a [Monocle](https://joe.sh/reintroducing-monocle) feature that's half in my head and half in a dozen conversations, blog drafts in various stages, and ideas for little tools to sand off some workflow friction, there's always something in flight. The problem is that after I close the tab, those threads basically vanish. A week later I can half-remember that I was working on something, but the actual context of what I decided and what I still needed to come back to is gone.
 
-So I built a small skill that has Claude notice when a conversation is worth tracking and offer to save it as a task in my task manager. I use [Linear](https://linear.app) -- it's not perfect but it works well for me. No workflow change on my side, just a yes or no when Claude suggests it. My own threads can keep falling out of my head, but now they have a place to land when they do.
+So I built a small skill that has Claude notice when a conversation is worth tracking and offer to save it as a task in my task manager. I use [Linear](https://linear.app) &mdash; it's not perfect but it works well for me. No workflow change on my side, just a yes or no when Claude suggests it. My own threads can keep falling out of my head, but now they have a place to land when they do.
 
 ## What I didn't expect
 
@@ -37,7 +37,7 @@ Here's how I'd build it again if I were starting fresh.
 
 ### Read the best practices doc first
 
-Anthropic's [skill authoring best practices doc](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) is the single most useful read before you write anything. It covers description writing that triggers correctly, how to structure the body so it loads progressively instead of all at once, and -- most relevant here -- a whole section on iterating with Claude itself as the author and tester.
+Anthropic's [skill authoring best practices doc](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) is the single most useful read before you write anything. It covers description writing that triggers correctly, how to structure the body so it loads progressively instead of all at once, and &mdash; most relevant here &mdash; a whole section on iterating with Claude itself as the author and tester.
 
 ### Let Claude write it for you
 
