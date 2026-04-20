@@ -118,4 +118,4 @@ If you take anything from this post, I'd rather it not be "use Tmux." I'd rather
 
 The full configuration is available in [my dotfiles repo](https://github.com/josephschmitt/dotfiles). Questions, or want to talk terminal workflows? Find me on [Mastodon](https://hachyderm.io/@josephschmitt), [Bluesky](https://bsky.app/profile/joe.sh), or [X](https://x.com/josephschmitt).
 
-[^1]: rootshell uses libghostty for rendering, the same engine that powers [Ghostty](https://ghostty.org), my desktop terminal. The consistency runs all the way down to the pixels.
+[^1]: [rootshell](https://rootshell.com) uses libghostty for rendering, the same engine that powers [Ghostty](https://ghostty.org), my desktop terminal. The consistency runs all the way down to the pixels.
