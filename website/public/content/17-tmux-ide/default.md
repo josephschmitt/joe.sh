@@ -4,9 +4,9 @@ Short: Tmux IDE
 ----
 Subtitle: It was the multiplexer all along
 ----
-Date: Mar 25, 2026 7:15pm
+Date: Apr 20, 2026 6:30pm
 ----
-Status: Draft
+Status: Published
 ----
 
 Text:
