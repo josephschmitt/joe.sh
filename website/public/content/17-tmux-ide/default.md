@@ -2,7 +2,7 @@ Title: Tmux Is My IDE
 ----
 Short: Tmux IDE
 ----
-Subtitle: How AI agents made me realize my text editor is just one piece of a larger system
+Subtitle: It was the multiplexer all along
 ----
 Date: Mar 25, 2026 7:15pm
 ----
@@ -11,44 +11,33 @@ Status: Draft
 
 Text:
 
-A few months ago, I wrote about [the tools that make my terminal work](https://joe.sh/terminal-tools). That post covered the individual utilities I use day-to-day, but looking back, it didn't really capture how they all fit together. Listing a bunch of binaries doesn't explain how a terminal environment can replace the cohesive experience of something like VS Code.
+A few months ago I wrote [about the tools that make my terminal work](https://joe.sh/terminal-tools), which was effectively a laundry list of binaries &mdash; fzf, zoxide, ripgrep, the whole lineup &mdash; plus some notes on how I use each one. It was fine as far as it went, but re-reading it later I realized it didn't actually answer the question it implied. You can't hand someone a list of CLIs and have them go "ah yes, clearly this is equivalent to the integrated experience of a modern IDE." Something was doing the work of holding all of that together, and the post didn't name it.
 
-The missing piece in that explanation was Tmux.
+The last post ended by noting that somewhere along the way my terminal had stopped being just a shell and become _the_ environment. That transition started with remote editing. After close to a decade in VS Code I wanted something I could bring with me to any box I SSHed into, and Neovim with LazyVim was the first thing polished enough to make the jump feel viable. For a long time I thought _that_ was the whole story: I was replacing VS Code with Neovim, and I spent an embarrassing amount of time tuning it to cover every aspect of my workflow. To its credit, it got pretty close. But as the rest of my setup matured, the picture clarified in a way I didn't expect: I didn't need to replace VS Code with Neovim, I needed to replace it with the terminal environment in general. Neovim was just the text editor, one component. What managed my projects, held my tools together, and made the whole environment feel like a single product was the terminal multiplexer I'd been treating as a supporting character: [Tmux](https://github.com/tmux/tmux/wiki).
 
-When I first moved to terminal-based development, I assumed Neovim was the thing replacing VS Code. I spent months configuring it to cover every aspect of my workflow, and it got pretty close. But as my setup matured, I started to see the distinction more clearly. I hadn't replaced VS Code with Neovim. I had replaced it with Tmux. Neovim was just the text editor, one component in a larger system. The thing actually managing my projects, integrating my tools, and orchestrating my workflow was Tmux.
+Once I saw it that way, I stopped hunting for plugins to shove every other terminal tool inside Neovim and let them live in the environment where they belonged. I built my developer experience around the system instead of trying to bend the system to fit inside the editor.
 
-That realization changed how I think about my development environment, and the rise of AI coding agents has made it even more obvious.
+Tmux is the glue. It holds a terminal-based workspace together and harmonizes the interactions across tools that don't know about each other, so the Unix philosophy &mdash; one tool, one job, done well &mdash; can scale into something that feels like a coherent product rather than a grab-bag of unrelated binaries. The individual tools stay small and focused. Tmux is what makes them _feel_ like one system.
 
-## The IDE Is Shifting
+However, the part worth writing about isn't any particular piece of the setup; it's the way the pieces compose, and how the composition kept holding up while everything I was doing inside it changed.
 
-The most capable AI coding tools right now are CLI-native. Claude Code, OpenCode, Codex, Gemini CLI: they all run in terminals, not in editor sidebars. They work best when they have access to a shell, a filesystem, and a way to run commands directly. The traditional IDE wasn't really designed around this. VS Code has terminal panels and Copilot, but the whole architecture still assumes the _editor_ is the center of the universe, and everything else is a plugin or a sidebar bolted on.
+## Sessions
 
-That model is starting to feel backwards. More and more of my actual development work happens outside the editor. An AI agent writes code in one pane while I review its changes in another. I switch between projects, manage git worktrees, run builds and tests, browse files, do code review, all without touching the editor. Neovim is still where I _edit text_, but it's no longer where I _develop software_. The development happens across the whole session, in all the panes and tools that Tmux is holding together.
+The first piece of Tmux that really clicked for me was sessions. In a GUI IDE the unit of work is a project folder: open one and the environment configures itself around it, more or less the way you left it last time. A Tmux session does the same thing at the shell level. Each one gets the project name, a working directory at its root, and whatever layout the work happens to call for. I hit `Ctrl-s o` to pop a picker that shows every active session alongside directories discovered by [pj](https://joe.sh/pj) and Zoxide, and if I pick a directory that isn't already a session one gets created on the spot. Functionally it's VS Code's "Open Recent," except every session I've ever opened is still alive in the background, waiting exactly where I left it.
 
-## What an IDE Actually Provides
+That last part took me a while to appreciate. When I close my laptop and open it a few hours later, every project is right where I left it, not reconstructed from a state file or reopened but simply continuing. The difference between "the IDE restored your last session" and "the session never stopped running" doesn't sound like much until you've lived with both, and then it really does.
 
-If you strip away the branding, an IDE is really just a system that unifies a handful of capabilities into a single interface: project management, file navigation, code search, version control, terminal access, layout management, and increasingly, AI integration.
+The payoff grows once the same setup lives on more than one machine. My laptop and the Mac mini I use as a home server both pull from the same dotfiles, so a session opened on one feels indistinguishable from a session opened on the other &mdash; same keybindings, same layout, same tools. If I'm away from my desk I can SSH into the Mac from my [iPad or my phone](https://rootshell.com)[^1] and land in exactly the environment I left. And because Tmux sessions run indefinitely in the background, long-running agent tasks keep ticking along after I've stepped away; I can pull out my phone a few hours later and check in on them from wherever I am.
 
-My terminal setup provides all of these. The difference is that instead of being bundled into one monolithic application, they're independent tools orchestrated by Tmux. The session is the workspace. The popups and panes are the UI. And a keybinding is never more than one shortcut away from any of it.
+## Popups as a UX layer
 
-## Sessions as Projects
+With project context handled, the next thing that started to bother me was how uneven the rest of the setup felt. I was running a dozen CLI tools across sessions &mdash; a git interface, a file browser, fuzzy finders, quick shells &mdash; and each one had its own idea of how to present itself. The tools themselves were fine; what was missing was a consistent way to invoke them.
 
-In a traditional IDE, you open a project folder and the environment configures itself around that context. In Tmux, I map the same concept to **sessions**. Each session is named after a project, rooted in its directory, and arranged with a layout that makes sense for the work.
+The fix turned out to be a centralized popup system. Every floating UI in my setup routes through the same script, which picks a size (small for pickers, medium for full applications, large for the rare things that need real estate) and positions the popup over the workspace the same way every time. The interaction model is consistent across tools: a keybinding opens a popup, I do the thing, the popup closes, I'm back where I was.
 
-When I trigger the session picker with `Ctrl-s o`, I get a unified list of active Tmux sessions alongside directories discovered by tools like [pj](https://joe.sh/pj) and Zoxide. Selecting a directory creates a new session there automatically, and selecting an existing session switches to it instantly. It's essentially VS Code's "Open Recent" workflow, but with the added benefit that every session I've ever opened is still alive in the background, exactly where I left it.
-
-Session persistence is one of Tmux's most underappreciated features. I can close my laptop, open it hours later, and every project is exactly as I left it: pane arrangement, working directory, running processes, all preserved. That's something GUI IDEs have never quite nailed.
-
-## Popups as a Command Palette
-
-One of the design patterns that makes this setup feel cohesive rather than cobbled together is a **standardized popup system**. Every tool that needs a floating UI opens in a popup that's sized and positioned consistently, whether it's a git interface, a file browser, a fuzzy finder, or a quick shell prompt.
-
-I have a centralized script that handles all of this. It defines preset sizes (small for pickers, medium for full applications, large for things that need maximum space) and every popup in my setup flows through it. The interaction model is always the same: a keybinding opens a popup over my current workspace, I do the thing I need to do, and when I'm done the popup disappears and I'm right back where I was. No new windows, no context switching.
-
-The interesting part is what happens when a popup needs to hand off to the editor. If I'm browsing files in Yazi and select one to edit, the naive behavior would be to open the editor _inside_ the popup, which is clunky and breaks the flow entirely. Instead, I built a "popup-aware editor" wrapper that detects when it's running inside a popup, finds the Neovim instance in my main workspace via its RPC socket, and opens the file there directly. The popup closes automatically and the file just appears in my editor.
+The part I'm proudest of is what happens when a popup needs to hand off to the editor. The naive version, opening Neovim inside the popup, is clunky and immediately breaks the illusion that the popup is a floating UI rather than a nested terminal. So I wrote a small wrapper that detects when it's running inside a popup, reaches out to the real Neovim instance in my main pane via its RPC socket, and opens the file there instead:
 
 ```bash
-# Simplified logic
 if [ -n "$TMUX_IN_POPUP" ]; then
   nvim --server $SOCKET --remote-send ":e $FILE<CR>"
 else
@@ -56,15 +45,13 @@ else
 fi
 ```
 
-This works across every tool that opens files: the file browser, git diffs, search results, all of it. It's a small piece of glue code, but it's what makes the whole system feel like a single application rather than a collection of separate programs that happen to be running next to each other.
+Twelve lines of shell, and it's one of those moments where the first time it worked I sat there thinking "oh, that's actually the thing." The popup vanishes and the file appears in the editor, with no visible seam.
 
-## Adaptive Layouts
+## Layouts
 
-GUI IDEs handle window management for you. In a terminal, you'd normally be on your own with manual splits and resizing. I've automated most of that away.
+Once every tool felt like part of the same product, the question that replaced "how does this interact with that" was "where should everything sit." For a while the answer was boring: a main Neovim pane on the left, an AI agent and shell stacked on the right. That configuration made sense when writing code was the main thing I did. It didn't stay the main thing I did.
 
-My workspace layout has actually evolved in an interesting way that reflects the broader shift I'm describing. It used to be a main editor pane on the left with an AI agent and shell stacked on the right, with the editor getting the lion's share of the space. That made sense when editing was my primary activity. But as I've leaned more into agent-driven development, my primary activity has shifted from _writing_ code to _reviewing_ it. That's why I built [Monocle](https://joe.sh/monocle), and it's now the tool that occupies the main pane. The agent runs alongside it, and Neovim is there when I need it, but the review surface is what gets the most real estate.
-
-The proportions adapt to however wide my terminal happens to be, with a keybinding that calculates the current terminal width and applies the most appropriate layout automatically. On a laptop it's a 50/50 split, on a normal monitor the sidebar gets a fixed 100 columns, and on an ultrawide the primary pane takes two-thirds of the space.
+Somewhere along the way my focus shifted from _writing_ code to _reviewing_ code an agent had written, and the layout I'd been defaulting to stopped fitting the work. That's why I built [Monocle](https://joe.sh/monocle), and why the main pane of my workspace is now Monocle rather than Neovim. The proportions also needed to adapt to whatever screen I happened to be plugged into &mdash; my laptop, an external monitor, or an ultrawide, depending on the day &mdash; so a keybinding measures `#{window_width}` and picks a layout:
 
 ```
 Laptop (<210 cols)          Monitor (210-310 cols)       Ultrawide (310+ cols)
@@ -77,27 +64,25 @@ Laptop (<210 cols)          Monitor (210-310 cols)       Ultrawide (310+ cols)
 └──────────┴──────────┘    └────────────────┴────────┘  └──────────────────┴──────────┘
 ```
 
-The implementation is surprisingly simple, just a conditional check on `#{window_width}`, but it eliminates one of those constant micro-frictions that add up over a long day of work.
+The same adaptive logic carries down to the phone. When I'm SSH'd in from an iPhone the grid doesn't make sense anymore, so I have a keybinding that drops me into what I think of as single-pane mode: the current pane zooms to fill the window, and another keybind cycles focus through the other panes in order. I've also patched the tab bar plugin to collapse at narrow widths so it doesn't spill off-screen. It's not as rich as the desktop view &mdash; how could it be? &mdash; but it's enough to check on an agent, nudge it, and put the phone back down.
 
-## AI Agents as Workspace Citizens
+You'll notice Neovim doesn't appear in any of those layouts. That's not a mistake.
 
-In my setup, AI agents aren't plugins or sidebars. Claude Code runs in a pane just like Neovim runs in a pane, with equal access to the filesystem, the shell, and the full terminal environment. There's no sandboxed extension API limiting what it can do, and there's no assumption that the editor is the thing in charge.
+## What happened to Neovim
 
-When I need to review what an agent has written, I don't switch to a diff view inside my editor. I use [Monocle](https://joe.sh/monocle), a dedicated TUI that runs alongside Claude Code and shows me every file change as it happens with syntax-highlighted diffs and line-level commenting. The feedback flows back to the agent through an MCP channel in real time. It's a proper review loop, the kind of workflow that would require deep integration with an editor's extension system but in Tmux is just another pane doing its thing.
+A year ago Neovim was the primary pane. Today Monocle holds that slot, with the agent sitting next to it in the secondary pane doing the actual writing, and Neovim has dropped out of the pane hierarchy entirely. It's an escape hatch. When I'm reviewing something in Monocle and it's faster to fix the problem directly than to describe the fix to the agent, I hit `Ctrl-g` on the selected file, it opens in `$EDITOR`, I make the edit, and I'm back in Monocle. That's the role Neovim plays now.
 
-When I need to work on multiple features in parallel, I use [Workmux](https://github.com/raine/workmux) to pair git worktrees with Tmux windows. Each worktree gets its own window with a full environment (editor, agent, review tools), and they're completely isolated from each other. Different code checked out, different git state, different running processes. I can have one agent refactoring the auth system in one window while another adds a new API endpoint in the next, and switch between them instantly.
+I didn't plan any of this. My focus shifted and the layout followed, which left the editor with a narrower role by default. The demotion itself isn't really the point, though. The point is that it didn't require me to rebuild anything. Tmux let the shape change out from under me without complaint. The layout grew a new primary pane and the editor migrated into an escape hatch, while the rest of the setup kept working as if nothing much had happened.
 
-None of this requires the editor to know about it. Neovim doesn't need an "AI sidebar" plugin or a "worktree manager" extension. Those capabilities live at the Tmux level, where they belong, because they're not editing concerns. They're workflow concerns.
+That's the thing I couldn't have done in VS Code without waiting for someone to ship an extension.
 
-## Customizing the Seams
+## Customizing the seams
 
-This is the part of the Tmux-as-IDE model that I think gets undersold. It's not just that the tools are composable, it's that Tmux gives you total control over the seams _between_ them, which means you can build exactly the UX you want for any workflow.
+Which gets at the thing I actually care about in this setup, and why I keep defending it to people who think I should just use a real IDE. Tmux doesn't only let you compose tools. It lets you customize the _seams_ between them, which means you can build the exact UX you want for any workflow without asking anyone for permission.
 
-A good example: I use [Workmux](https://github.com/raine/workmux) to manage the git worktree workflow I described above. It's a great tool, but it's CLI-only. You run `workmux add feature-branch` from a shell prompt, pass flags for merge strategies, type out branch names by hand. That works fine, but it means I need a terminal prompt available and I have to remember the exact command syntax every time I want to create or clean up a worktree.
+A concrete example. I use [Workmux](https://github.com/raine/workmux) to pair git worktrees with Tmux windows, which lets me work on multiple features in parallel with complete isolation between them. Workmux is a great tool. It's also a CLI, which means every worktree operation requires a shell prompt handy and the syntax memorized. That works fine in isolation, but the mental overhead starts to add up.
 
-In a traditional IDE, this is where you'd file a feature request and wait for the extension author to add a GUI. In Tmux, I just built one myself.
-
-I wrote a handful of small shell scripts using [gum](https://github.com/charmbracelet/gum) (a tool for building interactive shell UIs) and wired them into Tmux popups. Now when I press `Ctrl-s w a`, a popup appears asking for a branch name. I type it in, hit enter, and Workmux creates the worktree and spins up a fully configured Tmux window with my agent and review tools already running. When I'm done with a branch, `Ctrl-s w m` opens a different popup that lets me pick a target branch and merge strategy from a menu:
+In a traditional IDE, this is the point where you file a feature request and hope. In Tmux, I wrote a handful of shell scripts using [gum](https://github.com/charmbracelet/gum) (which is a delight; go poke around if you haven't used it) and wired them into popups. `Ctrl-s w a` pops a prompt asking for a branch name, I type it in, and Workmux creates the worktree and spins up a fully configured window in the background. `Ctrl-s w m` opens a different popup for merging:
 
 ```bash
 # workmux-merge.sh (simplified)
@@ -107,34 +92,30 @@ STRATEGY=$(gum choose --header "Merge strategy" merge rebase squash)
 workmux merge --$STRATEGY --into "$TARGET"
 ```
 
-The scripts are tiny, around 20 lines each, but they turn a CLI tool into something with a real interface. And because they're just shell scripts launched through Tmux's popup system, they automatically get consistent sizing, positioning, and keybinding behavior. I didn't have to learn an extension API or write a plugin. I wrote some shell, told Tmux to run it in a popup, and bound it to a key.
+Each script is around twenty lines of shell, and because they run through the same popup system as everything else they inherit consistent sizing, positioning, and keybinding behavior for free. Just shell, bound to a key, without an extension API to learn or plugin architecture to compile against.
 
-This pattern shows up everywhere in my setup. Whenever a tool has a workflow that's slightly too cumbersome, I can wrap it in a small script, give it a popup, and bind it to a key. The friction of going from "this is annoying" to "this is fixed" is remarkably low, because Tmux's building blocks (popups, panes, key tables, environment variables) are general-purpose enough to handle almost anything.
+This pattern keeps showing up. Every time some tool has a workflow that's slightly too cumbersome, I wrap it in a small script and bind that script to a keystroke through the popup system. The friction of going from "this is annoying" to "this is fixed" has always been low, and in the age of AI coding agents it's practically zero: I describe what I want, an agent writes the shell for me, and a minute later the annoyance is gone. Writing these scripts by hand used to feel like more overhead than the annoyance was worth, which is why I mostly just lived with it. Now I reach for the shell instead of resenting the UX.
 
-Honestly, the rise of AI coding agents is a big part of what's made this level of customization practical. These glue scripts aren't complicated individually, but writing a dozen of them to cover every workflow used to feel like more effort than it was worth. Now I can describe what I want in a prompt and have a working script in seconds. The barrier to building custom UX around my tools has basically disappeared, which means I actually _do_ it instead of just living with the friction.
+When I outgrow a tool entirely, like when Television displaced FZF in most of my workflows a few months back, the Tmux layer holding everything together doesn't need to change. I swap the tool out underneath and the keybindings stay the same.
 
-That flexibility extends to swapping out tools entirely. My [terminal tools post](https://joe.sh/terminal-tools) from a while back describes an FZF-heavy workflow that I've since migrated mostly to Television. My [pj post](https://joe.sh/pj) describes replacing TWM's project management with a standalone tool. The system evolves one piece at a time, and the Tmux layer that holds it all together doesn't need to change. That's the real difference between a framework and an application. VS Code is an application: when you outgrow something, you hope someone's written an extension for the replacement. Tmux is a framework: when you outgrow something, you swap it out or wrap it in something better.
+## The cost
 
-## The Tradeoffs
+There's a downside to all this, and I'd be lying to pretend otherwise. The same primitives that let me wrap Workmux in a polished popup also let me wire up a dozen half-baked commands I'll forget about in a week, each one taking up a keybinding in a finite namespace. A setup this composable turns into chaos fast without someone minding the store, and that someone is me. I spend a surprising amount of time making sure my keybindings and popups make sense as a whole, and I remove about as often as I add, because a command that doesn't earn its slot is worse than nothing. The vigilance is part of the price, and if I stopped enjoying the tinkering, the approach would stop working.
 
-The learning curve is real. Tmux has its own conceptual model (sessions, windows, panes) that takes time to internalize, and adding Neovim's modal editing plus a dozen other CLI tools on top of that makes the onboarding pretty steep. The first few weeks will feel slow. That's normal, and it does get better, but it's not something you can skip.
+That's before we get to the learning curve, which is steep. Tmux's conceptual model alone &mdash; sessions and windows and panes &mdash; is a lot to internalize before you layer on Neovim's modal editing and a dozen other CLI tools. Nothing works out of the box: every tool needs configuration, and every integration between tools ends up as shell I wrote and still maintain. My dotfiles repo is hundreds of files at this point, which I'm neither proud of nor embarrassed about. It's the cost of the thing, and if you don't genuinely enjoy tinkering with config files you will resent this setup pretty quickly.
 
-Nothing works out of the box, either. Every tool needs configuration, keybindings need to be mapped, and integrations need to be scripted. My dotfiles repo is hundreds of files at this point. That's the cost of this level of customization.
+There's no graphical debugger with breakpoints and watch windows either. Language-specific debuggers run in a pane just fine, but if visual debugging is central to how you work this will feel like a regression. I mostly live in TypeScript and debug through logs and tests, so it hasn't bitten me. GUI tools (Figma, a graphical database client, whatever else you spend time in) don't integrate naturally with a terminal-first setup, and Tmux isn't going to wrap Figma for you.
 
-There's no graphical debugger with breakpoints and watch windows. Language-specific debuggers exist and can run in a Tmux pane, but if you rely heavily on visual debugging this will feel like a step backward. I mostly work in TypeScript and debug through logs and tests, so this hasn't been a blocker for me, but it's worth knowing.
+## Closing thought
 
-And if your workflow involves a lot of GUI tools like design software, graphical database clients, or visual API testers, those won't integrate as naturally as they would in a traditional IDE.
+I don't think everyone should drop their IDE and switch to Tmux, and I genuinely mean that. This is a lot of hacking to pull off, plus a lot of ongoing curation to keep tidy, and it amounts to being your own product manager for your development environment. Plenty of people reasonably want someone else to do that work for them. VS Code is a spectacular piece of software, and if that's what you want, keep using it. I'm a builder and a tinkerer, so being able to design my own IDE and have it bend exactly to how I work brings me genuine personal joy. That's a disposition thing, not a prescription.
 
-## Why This Works Now
+What I will say is that once I stopped thinking of my editor as the center of my development environment and started thinking of it as one component in a system I was orchestrating myself, a lot of things about my workflow got easier to reason about. The shape of the system kept changing as my work changed. Agents came along, Monocle eventually displaced the editor, and Tmux let the whole thing happen without me having to rebuild from scratch.
 
-A year ago, I would have described this setup as a nice terminal workflow for people who like Vim. Today it feels like something more than that.
-
-The shift toward AI-assisted development is changing what an IDE needs to be. The most capable coding agents run in terminals. The best way to supervise them is with dedicated review tools rather than editor plugins. The most productive way to run multiple agents in parallel is with isolated worktrees in separate windows. All of these workflows are things Tmux handles natively.
-
-I'm not suggesting everyone should drop their IDE and switch to Tmux tomorrow. The setup cost is high, the learning curve is steep, and the maintenance is ongoing. But for me, the realization that my text editor is just one component in a larger system, and that Tmux is the thing actually orchestrating my development environment, changed how I think about the tools I use every day.
-
-The traditional IDE assumes the editor is the center of everything. In a world where AI agents are doing more and more of the actual writing, that assumption is starting to show its age.
+If you take anything from this post, I'd rather it not be "use Tmux." I'd rather it be: figure out what's actually orchestrating your development environment, and then pay attention to it.
 
 ---
 
-The full configuration is available in [my dotfiles repo](https://github.com/josephschmitt/dotfiles). If you have questions or want to talk terminal workflows, find me on [Mastodon](https://hachyderm.io/@josephschmitt), [Bluesky](https://bsky.app/profile/joe.sh), or [X](https://x.com/josephschmitt).
+The full configuration is available in [my dotfiles repo](https://github.com/josephschmitt/dotfiles). Questions, or want to talk terminal workflows? Find me on [Mastodon](https://hachyderm.io/@josephschmitt), [Bluesky](https://bsky.app/profile/joe.sh), or [X](https://x.com/josephschmitt).
+
+[^1]: rootshell uses libghostty for rendering, the same engine that powers [Ghostty](https://ghostty.org), my desktop terminal. The consistency runs all the way down to the pixels.
