@@ -4,9 +4,9 @@ Short: Catching Decisions with AI Skills
 ----
 Subtitle: The skill I built for code turned out to work just as well for picking a backpack
 ----
-Date: Apr 18, 2026 8:00pm
+Date: May 1, 2026 7:36am
 ----
-Status: Draft
+Status: Published
 ----
 
 Text:
