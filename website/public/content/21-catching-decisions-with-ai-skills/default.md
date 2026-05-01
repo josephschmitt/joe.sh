@@ -11,23 +11,23 @@ Status: Published
 
 Text:
 
-I tend to bounce around to lots of ideas at once, and these days almost all of my ideating and thinking out loud happens in conversations with AI like Claude. Between a [Monocle](https://joe.sh/reintroducing-monocle) feature that's half in my head and half in a dozen conversations, blog drafts in various stages, and ideas for little tools to sand off some workflow friction, there's always something in flight. The problem is that after I close the tab, those threads basically vanish. A week later I can half-remember that I was working on something, but the actual context of what I decided and what I still needed to come back to is gone.
+I tend to bounce around to lots of ideas at once, and these days almost all of my thinking out loud happens in conversations with AI like Claude. Between a [Monocle](https://joe.sh/reintroducing-monocle) feature that's half in my head and half in a dozen conversations, blog drafts in various stages, and ideas for little tools to sand off some workflow friction, there's always something in flight. The problem is that after I close the tab, those threads basically vanish. A week later I can half-remember that I was working on something, but the actual context of what I decided and what I still needed to come back to is gone.
 
-So I built a small skill that has Claude notice when a conversation is worth tracking and offer to save it as a task in my task manager. I use [Linear](https://linear.app) &mdash; it's not perfect but it works well for me. No workflow change on my side, just a yes or no when Claude suggests it. My own threads can keep falling out of my head, but now they have a place to land when they do.
+So I built a small skill that has Claude notice when a conversation is worth tracking and offer to save it as a task in my task manager. I use [Linear](https://linear.app) &mdash; it's not perfect but it works well for me. There's no workflow change on my side, just a yes or no when Claude suggests it. My own threads can keep falling out of my head, but now they have a place to land when they do.
 
 ## What I didn't expect
 
 Most of what this skill catches isn't code.
 
-I spent a good chunk of time this past weekend going back and forth with Claude about which backpack to buy. I wanted something that gave me one-bag-travel at both personal item and carry-on sizes, so I could save some money doing personal item only on quick solo 3-5 day trips while still keeping my hands free without a wheelie suitcase when traveling with the family. The two sizes that fit those constraints were each perfect for one case and awkward for the other, so Claude and I spent a while weighing volume tradeoffs, materials, and how the bag would look packed full versus half-empty. A real decision with meaningful tradeoffs, and none of it had anything to do with code.
+I spent a good chunk of time this past weekend going back and forth with Claude about which backpack to buy. I wanted something that gave me one-bag-travel at both personal item and carry-on sizes, so I could save some money doing personal item only on quick solo 3&ndash;5 day trips while still keeping my hands free without a wheelie suitcase when traveling with the family. The two sizes that fit those constraints were each perfect for one case and awkward for the other, so Claude and I spent a while weighing volume tradeoffs, materials, and how the bag would look packed full versus half-empty. A real decision with meaningful tradeoffs, and none of it had anything to do with code.
 
 When we'd landed on an answer, Claude asked if I wanted to save the decision to Linear so I could find it later.
 
-I wasn't expecting that. I'd written the skill thinking about code projects and blog drafts, things that obviously belong in a tracker, and the bag thread wasn't even on my radar. But of course it mattered. Six months from now when I'm trying to remember why I picked the bag I did, the reasoning would be gone and I'd relitigate the whole thing from scratch.
+I wasn't expecting that. I'd written the skill thinking about code projects and blog drafts, things that obviously belong in a tracker, and the bag thread wasn't even on my radar. But of course it mattered: six months from now when I'm trying to remember why I picked the bag I did, the reasoning would be gone and I'd relitigate the whole thing from scratch.
 
 Once I started paying attention to when the skill fired, I realized I chat with AI about a lot more than code. Just in the last few weeks Claude has helped me think through whether my favorite two Fuji primes cover enough ground to stop carrying around a bigger, heavier alternative, what to replace my Docker Watchtower auto-update service with now that it's been archived, and a handful of other threads that would have been equally worth keeping around.
 
-Consequential decisions happen in exploratory chats all the time, not just technical ones, and the "save this somewhere findable" reflex I already rely on for code turns out to be just as valuable for everything else I end up thinking through.
+Consequential decisions happen in exploratory chats all the time, not just technical ones, and the "save this somewhere findable" reflex I already rely on for code turns out to be just as valuable for everything else I think through.
 
 ## Building one for yourself
 
@@ -41,7 +41,7 @@ Anthropic's [skill authoring best practices doc](https://platform.claude.com/doc
 
 ### Let Claude write it for you
 
-Here's the move that matters: don't write the `SKILL.md` yourself. Open a Claude conversation and describe your workflow in plain language, telling it what tracker you're using, how your projects and teams are laid out, and when you'd want tracking to kick in versus never, then ask Claude to draft the skill. Claude understands the skill format natively, so your plain-language description is enough to get a well-structured first draft.
+Here's the move that matters: don't write the `SKILL.md` yourself. Open a Claude conversation and describe your workflow in plain language: what tracker you're using, how your projects and teams are laid out, when you'd want tracking to kick in versus never. Then ask Claude to draft the skill. Claude understands the skill format natively, so your plain-language description is enough to get a well-structured first draft.
 
 The less obvious reason this matters is that Claude isn't only translating your description into a markdown file. It's also bringing architectural knowledge about how skills actually behave that you probably don't have when you start, pushing back on parts of your idea that won't work and flagging gaps you hadn't thought to ask about.
 
@@ -65,7 +65,7 @@ The part worth lingering on is where the insight came from. If I'd written the s
 
 ### Example: what I told Claude about my setup
 
-For what it's worth, here's roughly what I said when bootstrapping mine:
+Here's roughly what I said when bootstrapping mine:
 
 > I use Linear as my personal task tracker. My team key is JJS. The projects I actively route work to are:
 >
