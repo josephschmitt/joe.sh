@@ -1,0 +1,11 @@
+{% if gallery %}
+	<div class="media">
+	    <ul>
+	        {% for image in gallery %}
+	            {%- set ratio = image.width / image.height -%}
+	            {%- if ratio >= 1.3 %}{% set imgClass = 'land' %}{% elif ratio <= 0.77 %}{% set imgClass = 'port' %}{% else %}{% set imgClass = 'sq' %}{% endif %}
+	            <li style="background-image: url({{ image.url }})" class="{{ imgClass }}"></li>
+	        {% endfor %}
+	    </ul>
+	</div>
+{% endif %}

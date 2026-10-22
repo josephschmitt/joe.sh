@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+<header>
+	{% include "partials/logo.njk" %}
+</header>
+<section id="home" class="column">
+	<hgroup>
+		<h1 title="...but I don't work at a button factory">{{ home.greeting | markdown | safe }}</h1>
+		<h3>{{ home.subtitle | markdown | safe }}</h3>
+	</hgroup>
+
+	<nav>
+		{% include "partials/menu.njk" %}
+	</nav>
+</section>

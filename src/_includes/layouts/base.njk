@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ title | html }}{% if not isHome %} — {{ site.title | html }}{% endif %}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta charset="utf-8" />
+	<meta name="description" content="{% if isHome %}{{ site.description | html }}{% else %}{{ title | excerpt(256) }}. {{ subtitle | excerpt(256) }} — {{ site.title | html }}{% endif %}" />
+	<meta name="keywords" content="{{ site.keywords | html }}" />
+	<meta name="robots" content="index, follow" />
+	
+	<link rel="shortcut icon" href="/assets/images/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml" title="RSS Feed" />
+	<link rel="me" href="https://hachyderm.io/@josephschmitt">
+	<link rel="me" href="https://mastodon.cloud/@joe">
+
+	<link rel="stylesheet" href="/assets/styles/styles.css" />
+{% if kind == 'gallery' %}	<link rel="stylesheet" href="/assets/styles/gallery.css" />
+{% elif code %}	<link rel="stylesheet" href="/assets/styles/code.css" />
+{% endif %}</head>
+<body>
+{{ content | safe }}
+{% include "partials/footer.njk" %}
+{% if kind == 'gallery' %}	<script src="/assets/scripts/gallery.js"></script>
+{% endif %}</body>
+</html>

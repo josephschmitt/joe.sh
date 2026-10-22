@@ -1,0 +1,23 @@
+---
+permalink: /_redirects
+eleventyExcludeFromCollections: true
+---
+# Netlify / Cloudflare Pages redirect rules. Generated from src/redirects.njk.
+
+# The RSS feed used to live at /feed
+/feed /feed.xml 301
+/feed/ /feed.xml 301
+
+# Kirby's tiny URLs (/x/<hash>) still resolve to their pages
+{% for p in collections.redirectable -%}
+/x/{{ p.data.slug | tinyhash }} {{ p.url }} 301
+{% endfor %}
+# Old Kirby content paths for images and downloads
+{% for p in collections.redirectable -%}
+/content/{{ p.page.inputPath | replace('./src/posts/', '') | replace('./src/pages/', '') | replace('/index.md', '') }}/* {{ p.url }}:splat 301
+{% endfor %}
+# The old error page URL
+/error /404.html 404
+
+# The Twitter archive is a single-page app that handles its own deep links
+/tweets/* /tweets/index.html 200

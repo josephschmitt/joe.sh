@@ -1,0 +1,19 @@
+<hgroup {{ 'class="column"' if not hero }}>
+	<h1>
+		{% if link %}
+	    	&#8677; <a href="{{ link }}">{{ title | html }}</a>
+	    {% else %}
+	    	{{ title | kirbytext(page.url, files) | safe }}
+	    {% endif %}
+	</h1>
+
+    {% if subtitle %}
+	    <h2>
+	    	{{ subtitle | kirbytext(page.url, files) | safe }}
+	    </h2>
+	{% endif %}
+</hgroup>
+
+{% if hero and hero.credit %}
+        {{ hero.credit | kirbytext(page.url, files) | safe }}
+{% endif %}

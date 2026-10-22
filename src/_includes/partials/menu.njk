@@ -1,0 +1,11 @@
+<ul>
+	{% for post in collections.menu %}
+		<li>
+			<a class="{{ 'draft' if post.data.status == 'Draft' }}" href="{{ post.url }}">{{ post.data.title }}</a>
+			{% if post.data.subtitle %}
+				<em>{{ post.data.subtitle | markdown | safe }}</em>
+			{% endif %}
+			<em></em>
+		</li>
+	{% endfor %}
+</ul>
