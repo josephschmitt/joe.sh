@@ -1,0 +1,33 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?><!-- generator="Eleventy" -->
+
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+
+  <channel>
+    <title>{{ feed.title | xml }}</title>
+    <link>{{ site.url }}/</link>
+	<image>
+	    <url>{{ site.url }}/assets/images/favicon.ico</url>
+	    <title>{{ site.title | xml }}</title>
+	    <link>{{ site.url }}</link>
+	</image>
+    <generator>Eleventy</generator>
+    <lastBuildDate>{{ buildTime | date('r') }}</lastBuildDate>
+    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
+
+    <description>{{ feed.description | xml }}</description>
+  
+    {% for item in collections.published | reverse %}
+    <item>
+      <title>{{ item.data.title | xml }}</title>  
+      <link>{{ site.url }}/{{ item.data.slug }}</link>
+      <guid>{{ site.url }}/{{ item.data.slug }}</guid>
+      <pubDate>{{ (item.date if item.data.date else buildTime) | date('r') }}</pubDate>
+      <description><![CDATA[{{ item.templateContent | absoluteUrls(site.url) | safe }}]]></description>      
+    </item>
+    {% endfor %}        
+  </channel>
+</rss>

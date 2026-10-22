@@ -1,0 +1,16 @@
+{%- set themeClass = theme if (theme and theme != 'default') else '' -%}
+{%- set headerStyle = '' -%}
+{%- if hero -%}
+	{%- set headerBackground = 'background-image: url(' + hero.url + ');' -%}
+	{%- set headerAlign = ('background-position: ' + hero.align + ';') if hero.align else '' -%}
+	{%- set headerFilter = ('-webkit-filter: ' + hero.filter + '; -moz-filter: ' + hero.filter + '; -ms-filter: ' + hero.filter + '; filter: ' + hero.filter) if hero.filter else '' -%}
+	{%- set headerStyle = 'style="' + headerBackground + ' ' + headerAlign + ' ' + headerFilter + '"' -%}
+{%- endif -%}
+{%- set headerClass = themeClass + ' ' + ('hero' if (hero or gallery) else '') + ' ' + ('gallery' if gallery else '') -%}
+<header class="{{ headerClass }}" {{ headerStyle | safe }}>
+	{% include "partials/logo.njk" %}
+	
+	{% include "partials/hgroup.njk" %}
+
+	{% include "partials/gallery.njk" %}
+</header>

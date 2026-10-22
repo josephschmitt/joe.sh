@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+{% set hero = heroImage %}
+{% set gallery = null %}
+{% include "partials/article-header.njk" %}
+
+<section class="column content">
+	<article>
+	{% include "partials/article-date.njk" %}
+
+	{{ content | safe }}
+</article>
+
+{% include "partials/aside.njk" %}
+</section>

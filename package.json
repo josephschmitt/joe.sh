@@ -1,0 +1,25 @@
+{
+  "name": "joe.sh",
+  "version": "2.0.0",
+  "description": "Personal website for Joseph Schmitt, built with Eleventy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf _site",
+    "scripts": "node scripts/build-scripts.mjs",
+    "convert": "node scripts/convert-content.mjs"
+  },
+  "author": "Joseph Schmitt",
+  "license": "BSD",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.7",
+    "image-size": "^2.0.4",
+    "js-yaml": "^4.1.0",
+    "markdown-it": "^15.0.3",
+    "markdown-it-footnote": "^4.0.0",
+    "sass": "^1.106.1",
+    "terser": "^5.51.2"
+  }
+}

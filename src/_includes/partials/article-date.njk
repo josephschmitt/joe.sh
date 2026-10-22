@@ -1,0 +1,7 @@
+{% if date %}
+	<a class="timestamp" href="/x/{{ slug | tinyhash }}">
+		<span class="month">{{ date | date('M') }}</span>
+		<span class="day">{{ date | date('d') }}</span>
+		<span class="year">{{ date | date('Y') }}</span>
+	</a>
+{% endif %}
