@@ -15,12 +15,11 @@
 
 	<link rel="stylesheet" href="/assets/styles/styles.css" />
 {% if kind == 'gallery' %}	<link rel="stylesheet" href="/assets/styles/gallery.css" />
-{% elif code %}	<link rel="stylesheet" href="/assets/styles/themes/tomorrow.css" />
+{% elif code %}	<link rel="stylesheet" href="/assets/styles/code.css" />
 {% endif %}</head>
 <body>
 {{ content | safe }}
 {% include "partials/footer.njk" %}
-	<script src="/assets/scripts/main.min.js"></script>
-{% if kind == 'gallery' %}	<script async src="/assets/scripts/gallery.min.js"></script>
+{% if kind == 'gallery' %}	<script src="/assets/scripts/gallery.js"></script>
 {% endif %}</body>
 </html>

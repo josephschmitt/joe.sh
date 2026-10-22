@@ -1,6 +1,5 @@
 @use 'sass:math';
 @use 'common' as *;
-@import url(http://fonts.googleapis.com/css?family=Cousine);
 
 * {
 	margin: 0px;
@@ -155,11 +154,7 @@ h1.logo {
 			vertical-align: middle;
 			position: relative;
 
-			background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 65%, rgba(255,255,255,0) 65%); /* FF3.6+ */
-			background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 65%,rgba(255,255,255,0) 65%); /* Chrome10+,Safari5.1+ */
-			background: radial-gradient(ellipse at center, rgba(255,255,255,1) 65%,rgba(255,255,255,0) 65%); /* W3C */
-			background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 67%,rgba(255,255,255,0) 67%) 0 3px; /* IE10+ */
-
+			background: radial-gradient(ellipse at center, rgba(255,255,255,1) 65%, rgba(255,255,255,0) 65%);
 			background-repeat: no-repeat;
 		}
 	}
@@ -184,21 +179,9 @@ header {
 			size: cover;
 		}
 
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-box-pack: center;
-
-		display: -moz-box;
-		-moz-box-orient: vertical;
-		-moz-box-pack: center;
-
-		display: -ms-flexbox;
-		-ms-flex-direction: column;
-		-ms-flex-pack: center;
-
-		display: box;
-		box-orient: vertical;
-		box-pack: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 
 		& > * {
 			position: relative;
@@ -319,10 +302,7 @@ header {
 	margin-right: 15px;
 	
 	.month {
-		-webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        transform: rotate(-90deg);
+		transform: rotate(-90deg);
 		font-family: 'Cousine', monospace;
 		font-size: 1.2em;
 		position: absolute;

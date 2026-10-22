@@ -73,13 +73,11 @@ header.gallery {
 
 		overflow-x: auto;
 		overflow-y: hidden;
-		-webkit-overflow-scrolling: touch;
 
 		ul {
 			min-width: 500px;
 			height: 100%;
 			list-style: none;
-			-webkit-perspective: 1000;
 		}
 
 		li {
@@ -88,27 +86,24 @@ header.gallery {
 			background-repeat: no-repeat;
 			opacity: .5;
 
-			// -webkit-transition: .2s opacity ease-out;
-			-webkit-transition-duration: .2s;
-			-webkit-transition-timing-function: ease;
-			-webkit-transition-property: opacity, -webkit-transform;
-			-webkit-transform: translateX(0);
+			transition: opacity .2s ease, transform .2s ease;
+			transform: translateX(0);
 
 			&:hover {
 				opacity: 1;
 				cursor: pointer;
-				-webkit-transform: scale(1.05, 1.05);
+				transform: scale(1.05, 1.05);
 				z-index: 100;
 			}
 
 			&.active {
-				-webkit-transition: .35s -webkit-transform ease !important;
+				transition: transform .35s ease !important;
 				z-index: 100000;
 				height: auto !important;
 			}
 
 			&.scale {
-				-webkit-transition: none;
+				transition: none;
 			}
 		}
 

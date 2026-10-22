@@ -1,5 +1,8 @@
 import path from 'node:path';
 import * as sass from 'sass';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
+import * as esbuild from 'esbuild';
 import { md, markdown } from './lib/markdown.js';
 import { kirbytext, kirbytextPreprocess, excerpt, html } from './lib/kirbytext.js';
 import { phpDate } from './lib/dates.js';
@@ -15,7 +18,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/assets': 'assets', 'src/tweets': 'tweets' });
   eleventyConfig.addPassthroughCopy(pageAssetMap('src'));
 
-  // Sass: src/sass/*.scss compiles to /assets/styles/*.css (see src/sass/sass.11tydata.js).
+  // Sass: src/sass/*.scss compiles to /assets/styles/*.css (see src/sass/sass.11tydata.js),
+  // then runs through autoprefixer for the browsers in package.json's browserslist.
   eleventyConfig.addTemplateFormats('scss');
   eleventyConfig.addExtension('scss', {
     outputFileExtension: 'css',
@@ -28,8 +32,24 @@ export default function (eleventyConfig) {
         quietDeps: true,
       });
       this.addDependencies(inputPath, result.loadedUrls);
-      return () => result.css;
+      return async () => {
+        const processed = await postcss([autoprefixer]).process(result.css, { from: undefined });
+        return processed.css;
+      };
     },
+  });
+
+  // JavaScript: each file in src/scripts is an esbuild entry point, bundled and minified
+  // into /assets/scripts/<name>.js.
+  eleventyConfig.addWatchTarget('src/scripts/');
+  eleventyConfig.on('eleventy.before', async ({ dir }) => {
+    await esbuild.build({
+      entryPoints: ['src/scripts/gallery.js'],
+      bundle: true,
+      minify: true,
+      target: 'es2018',
+      outdir: path.join(dir.output, 'assets/scripts'),
+    });
   });
 
   // Kirby content tags like (figure: ...) are expanded before markdown rendering.

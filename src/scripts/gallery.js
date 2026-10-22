@@ -1,11 +1,14 @@
-if ($('.media ul').children().length > 1) {
-	$('.media').isotope({
-		// options
-		itemSelector : 'li',
-		layoutMode : 'masonryHorizontal',
-		containerStyle: {
-			position: 'absolute'
-		},
-		resizesContainer: false
-	});
+import Isotope from 'isotope-layout';
+import 'isotope-masonry-horizontal';
+
+const media = document.querySelector('.media');
+
+if (media && media.querySelectorAll('li').length > 1) {
+  new Isotope(media, {
+    itemSelector: 'li',
+    layoutMode: 'masonryHorizontal',
+    containerStyle: { position: 'absolute' },
+    resizeContainer: false,
+    transitionDuration: 0,
+  });
 }

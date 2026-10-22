@@ -4,6 +4,8 @@ Personal website for Joseph Schmitt, built as a static site with [Eleventy](http
 
 ## Working on the site
 
+Requires Node 22 (see `.nvmrc`).
+
 ```
 npm install
 npm run serve     # builds and serves at http://localhost:8080 with live reload
@@ -18,12 +20,12 @@ Drafts (posts whose `status` is not `Published`) are listed on the home page in 
 - `src/pages/<slug>/index.md` – standalone pages (colophon, photo galleries).
 - `src/_includes/layouts` and `src/_includes/partials` – Nunjucks templates.
 - `src/_data` – site-wide settings (`site.json`), home page copy, feed metadata.
-- `src/sass` – stylesheets, compiled to `/assets/styles/*.css` during the build.
-- `src/scripts` – JavaScript sources. `npm run scripts` bundles and minifies them into `src/assets/scripts`.
-- `src/assets` – fonts, images and the prebuilt script bundles, copied as-is.
+- `src/sass` – stylesheets. The build compiles them with Sass and runs autoprefixer (browsers from `browserslist` in `package.json`) into `/assets/styles/*.css`.
+- `src/scripts` – JavaScript. Each file is an esbuild entry point, bundled and minified into `/assets/scripts/<name>.js` at build time. Only the photo galleries load a script.
+- `src/assets` – fonts and images, copied as-is.
 - `src/tweets` – the static Twitter archive, copied as-is.
 - `src/redirects.njk` – generates `_redirects` (Netlify / Cloudflare Pages format) with the old Kirby tiny URLs, old image paths and the feed location.
-- `lib/kirbytext.js` – the `(figure: ...)`, `(heading: ...)`, `(forkme: ...)`, `(file: ...)`, `(link: ...)` and `(vimeo: ...)` content tags carried over from Kirby.
+- `lib/kirbytext.js` – the `(figure: ...)`, `(heading: ...)`, `(forkme: ...)`, `(file: ...)`, `(link: ...)` and `(vimeo: ...)` content tags carried over from Kirby, and build-time syntax highlighting of fenced code with Prism.
 
 See `CLAUDE.md` for the post format and writing guide.
 
