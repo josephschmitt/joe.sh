@@ -1,7 +1,7 @@
 <article>
-	<? snippet('article.date') ?>
+	<?php snippet('article.date') ?>
 
 	<?= kirbytext($page->text()) ?>
 </article>
 
-<? snippet('aside') ?>
+<?php snippet('aside') ?>

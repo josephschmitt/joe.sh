@@ -1,14 +1,14 @@
-<? snippet('head') ?>
+<?php snippet('head') ?>
 <?= css('assets/styles/gallery.css') ?>
 
-<? snippet('article.header', array(
+<?php snippet('article.header', array(
     'hero' => null,
     'gallery' => $page->images()
 )) ?>
 
 <section class="column content">
-    <? snippet('article') ?>
+    <?php snippet('article') ?>
 </section>
 
-<? snippet('footer') ?>
-<? snippet('foot') ?>
+<?php snippet('footer') ?>
+<?php snippet('foot') ?>

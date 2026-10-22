@@ -15,10 +15,10 @@
 
 	<?= css('assets/styles/styles.css') ?>
 
-	<? if($page->template() == 'default'): ?>
-		<? if($page->code()): ?>
+	<?php if($page->template() == 'default'): ?>
+		<?php if($page->code()): ?>
 		  <?= css('assets/styles/themes/tomorrow.css') ?>
-		<? endif ?>
-	<? endif ?>
+		<?php endif ?>
+	<?php endif ?>
 </head>
 <body>

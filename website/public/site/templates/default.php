@@ -1,13 +1,13 @@
-<? snippet('head') ?>
+<?php snippet('head') ?>
 
-<? snippet('article.header', array(
+<?php snippet('article.header', array(
 	'hero' => $page->files()->find('hero.jpg'),
 	'gallery' => null
 )) ?>
 
 <section class="column content">
-	<? snippet('article') ?>
+	<?php snippet('article') ?>
 </section>
 
-<? snippet('footer') ?>
-<? snippet('foot') ?>
+<?php snippet('footer') ?>
+<?php snippet('foot') ?>

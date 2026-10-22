@@ -1,25 +1,25 @@
-<?
+<?php
 	$columnClass = !$hero ? 'class="column"' : '';
 ?>
 
 <hgroup <?= $columnClass ?>>
 	<h1>
-		<? if($page->link()): ?>
+		<?php if($page->link()): ?>
 	    	&#8677; <a href="<?= $page->link(); ?>"><?= html($page->title()) ?></a>
-	    <? else: ?>
+	    <?php else: ?>
 	    	<?= kirbytext($page->title()) ?>
-	    <? endif ?>
+	    <?php endif ?>
 	</h1>
 
-    <? if ($page->subtitle()): ?>
+    <?php if ($page->subtitle()): ?>
 	    <h2>
 	    	<?= kirbytext($page->subtitle()) ?>
 	    </h2>
-	<? endif ?>
+	<?php endif ?>
 </hgroup>
 
-<? if ($hero): ?>
-	<?
+<?php if ($hero): ?>
+	<?php
 		$credit = $hero->credit();
 		// $attribution = $hero->attribution();
 		// if ($attribution && $attribution != '') {
@@ -27,7 +27,7 @@
 		// }
 	?>
 
-	<? if ($credit && $credit != ''): ?>
+	<?php if ($credit && $credit != ''): ?>
         <?= kirbytext($credit) ?>
-    <? endif ?>
-<? endif ?>
+    <?php endif ?>
+<?php endif ?>

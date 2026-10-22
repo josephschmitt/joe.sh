@@ -102,6 +102,7 @@ class page extends obj {
     return $this->prev = a::get($siblings, $prevIndex);                
   }
 
+  #[\ReturnTypeWillChange]
   function next($sort=false, $direction='asc') {
     return $this->_next($this->siblings(), $sort, $direction);
   }
