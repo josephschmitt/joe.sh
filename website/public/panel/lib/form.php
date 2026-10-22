@@ -3,6 +3,7 @@
 // direct access protection
 if(!defined('KIRBY')) die('Direct access is not allowed');
 
+#[\AllowDynamicProperties]
 class form {
 
   var $fields   = array();

@@ -1914,7 +1914,7 @@ class f {
    * @return string 
    */  
   static function extension($filename) {
-    $ext = str_replace('.', '', strtolower(strrchr(trim($filename), '.')));
+    $ext = str_replace('.', '', strtolower(strrchr(trim((string)$filename), '.')));
     $ext = url::strip_query($ext);
     $ext = preg_replace('!\:.*!i', '', $ext);
     $ext = preg_replace('!\#.*!i', '', $ext);
@@ -2043,7 +2043,7 @@ class g {
   static function set($key, $value=null) {
     if(is_array($key)) {
       // set all new values
-      $GLOBALS = array_merge($GLOBALS, $key);
+      foreach($key as $k => $v) $GLOBALS[$k] = $v;
     } else {
       $GLOBALS[$key] = $value;
     }
@@ -2594,9 +2594,9 @@ class str {
     */  
   static function html($string, $keep_html=true) {
     if($keep_html) {
-      return stripslashes(implode('', preg_replace('/^([^<].+[^>])$/e', "htmlentities('\\1', ENT_COMPAT, 'utf-8')", preg_split('/(<.+?>)/', $string, -1, PREG_SPLIT_DELIM_CAPTURE))));
+      return stripslashes(implode('', preg_replace_callback('/^([^<].+[^>])$/', function($m) { return htmlentities($m[1], ENT_COMPAT, 'utf-8'); }, preg_split('/(<.+?>)/', (string)$string, -1, PREG_SPLIT_DELIM_CAPTURE))));
     } else {
-      return htmlentities($string, ENT_COMPAT, 'utf-8');
+      return htmlentities((string)$string, ENT_COMPAT, 'utf-8');
     }
   }
 
@@ -2920,7 +2920,7 @@ class str {
     * @return string  
     */
   static function lower($str) {
-    return mb_strtolower($str, 'UTF-8');
+    return mb_strtolower((string)$str, 'UTF-8');
   }
 
   /** 
@@ -3220,7 +3220,7 @@ class str {
     */
   static function stripslashes($string) {
     if(is_array($string)) return $string;
-    return (get_magic_quotes_gpc()) ? stripslashes(stripslashes($string)) : $string;
+    return $string;
   }
 
 }

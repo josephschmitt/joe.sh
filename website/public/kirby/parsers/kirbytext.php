@@ -60,6 +60,7 @@ function gist($url, $file=false) {
   ));
 }
 
+#[\AllowDynamicProperties]
 class kirbytext {
   
   var $obj         = null;

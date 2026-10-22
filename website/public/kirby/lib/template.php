@@ -27,8 +27,8 @@ class tpl {
   
   static function loadFile($file, $vars=array(), $return=false) {
     if(!file_exists($file)) return false;
-    @extract(self::$vars);
-    @extract($vars);
+    extract((array)self::$vars);
+    extract((array)$vars);
     content::start();
     require($file);
     return content::end($return); 

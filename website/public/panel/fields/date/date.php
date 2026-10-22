@@ -1,5 +1,7 @@
 <?php 
 
+global $panel;
+
 // define the default format if nothing is set
 if(!isset($format)) $format = 'yy-mm-dd'; 
 

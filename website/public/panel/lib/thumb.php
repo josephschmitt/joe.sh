@@ -5,6 +5,7 @@ function thumb($obj, $options=array(), $tag=true) {
   return ($tag) ? $thumb->tag() : $thumb->url();
 }
 
+#[\AllowDynamicProperties]
 class thumb {
 
   var $obj = null;

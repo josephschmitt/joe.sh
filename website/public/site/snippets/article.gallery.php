@@ -1,8 +1,8 @@
-<? if($gallery): ?> 
+<?php if($gallery): ?> 
 	<div class="media">
 	    <ul>
-	        <? foreach($gallery as $image): ?>
-	            <?
+	        <?php foreach($gallery as $image): ?>
+	            <?php
 	                $ratio = $image->width()/$image->height();
 	                if ($ratio >= 1.3) {
 	                    $imgClass = 'land';
@@ -16,7 +16,7 @@
 	            ?>
 
 	            <li style="background-image: url(<?= $image->url() ?>)" class="<?= $imgClass ?>"></li>
-	        <? endforeach ?>
+	        <?php endforeach ?>
 	    </ul>
 	</div>
-<? endif ?>
+<?php endif ?>

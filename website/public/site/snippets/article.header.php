@@ -1,4 +1,4 @@
-<?
+<?php
 	$theme = $page->theme() && $page->theme() != 'default' ? $page->theme() : '';
 
 	//Hero
@@ -11,16 +11,16 @@
 ?>
 
 <header class="<?= $headerClass ?>" <?= $headerStyle ?>>
-	<? snippet('logo') ?>
+	<?php snippet('logo') ?>
 	
-	<? 
+	<?php 
 		snippet('article.hgroup', array(
 			'hero' => $hero,
 			'gallery' => $gallery
 		));
 	?>
 
-    <? 
+    <?php 
     	snippet('article.gallery', array(
     		'gallery' => $gallery
     	));

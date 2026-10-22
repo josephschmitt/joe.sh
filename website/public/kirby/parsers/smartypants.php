@@ -161,6 +161,7 @@ function smarty_modifier_smartypants($text, $attr = NULL) {
 # SmartyPants Parser Class
 #
 
+#[\AllowDynamicProperties]
 class SmartyPants_Parser {
 
 	# Options to specify which transformations to make:
@@ -172,7 +173,7 @@ class SmartyPants_Parser {
 	var $do_stupefy   = 0;
 	var $convert_quot = 0; # should we translate &quot; entities into normal quotes?
 
-	function SmartyPants_Parser($attr = SMARTYPANTS_ATTR) {
+	function __construct($attr = SMARTYPANTS_ATTR) {
 	#
 	# Initialize a SmartyPants_Parser with certain attributes.
 	#
@@ -642,7 +643,7 @@ class SmartyPantsTypographer_Parser extends SmartyPants_Parser {
 
 	
 
-	function SmartyPantsTypographer_Parser($attr = SMARTYPANTS_ATTR) {
+	function __construct($attr = SMARTYPANTS_ATTR) {
 	#
 	# Initialize a SmartyPantsTypographer_Parser with certain attributes.
 	#
@@ -678,7 +679,7 @@ class SmartyPantsTypographer_Parser extends SmartyPants_Parser {
 	#    sign to completly remove any space present)
 	#
 		# Initialize inherited SmartyPants parser.
-		parent::SmartyPants_Parser($attr);
+		parent::__construct($attr);
 				
 		if ($attr == "1" || $attr == "2" || $attr == "3") {
 			# Do everything, turn all options on.

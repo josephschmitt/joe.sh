@@ -1,7 +1,7 @@
-<? snippet('head') ?>
+<?php snippet('head') ?>
 
 <header>
-	<? snippet('logo') ?>
+	<?php snippet('logo') ?>
 </header>
 <section id="home" class="column">
 	<hgroup>
@@ -10,9 +10,9 @@
 	</hgroup>
 
 	<nav>
-		<? snippet('menu') ?>
+		<?php snippet('menu') ?>
 	</nav>
 </section>
 
-<? snippet('footer') ?>
-<? snippet('foot') ?>
+<?php snippet('footer') ?>
+<?php snippet('foot') ?>

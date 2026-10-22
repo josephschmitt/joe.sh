@@ -14,6 +14,7 @@ if(!defined('KIRBY')) die('Direct access is not allowed');
  * 
  * @package Kirby CMS
  */
+#[\AllowDynamicProperties]
 class obj implements Iterator {
 
   public $_ = array();
@@ -34,18 +35,22 @@ class obj implements Iterator {
     return a::get($this->_, $n);
   }
 
+  #[\ReturnTypeWillChange]
   function rewind() {
     reset($this->_);
   }
 
+  #[\ReturnTypeWillChange]
   function current() {
     return current($this->_);
   }
 
+  #[\ReturnTypeWillChange]
   function key() {
     return key($this->_);
   }
 
+  #[\ReturnTypeWillChange]
   function next() {
     return next($this->_);
   }
@@ -59,6 +64,7 @@ class obj implements Iterator {
     return (isset($array[$n])) ? $array[$n] : false;
   }
 
+  #[\ReturnTypeWillChange]
   function valid() {
     $key = key($this->_);
     $var = ($key !== NULL && $key !== FALSE);

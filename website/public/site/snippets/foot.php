@@ -1,10 +1,10 @@
 	<?= js('assets/scripts/main.min.js') ?>
 
-	<? if($page->template() == 'gallery'): ?>
+	<?php if($page->template() == 'gallery'): ?>
 		<?= js('assets/scripts/gallery.min.js', true) ?>
-	<? endif ?>
+	<?php endif ?>
 
-	<? if(c::get('debug') != 'true'): ?>
+	<?php if(c::get('debug') != 'true'): ?>
 		<script type="text/javascript">
 			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-38697886-1']);
@@ -16,6 +16,6 @@
 				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			})();
 		</script>
-	<? endif ?>
+	<?php endif ?>
 </body>
 </html>

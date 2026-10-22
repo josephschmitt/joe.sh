@@ -62,6 +62,7 @@ if (!function_exists('spyc_load_file')) {
    * </code>
    * @package Spyc
    */
+#[\AllowDynamicProperties]
 class Spyc {
 
   // SETTINGS

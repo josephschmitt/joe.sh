@@ -9,6 +9,7 @@ if(!c::get('uri.param.separator')) {
   c::set('uri.param.separator', (DIRECTORY_SEPARATOR == '/') ? ':' : ';');
 }
 
+#[\AllowDynamicProperties]
 class uri {
 
   function __construct($uri=false) {
@@ -53,7 +54,7 @@ class uri {
       if(str::contains($p, c::get('uri.param.separator'))) {
         $parts = explode(c::get('uri.param.separator'), $p);
         if(count($parts) < 2) continue;
-        $this->params->$parts[0] = $parts[1];
+        $this->params->{$parts[0]} = $parts[1];
       } else {
         $this->path->_[] = $p;
       }

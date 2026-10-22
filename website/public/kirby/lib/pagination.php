@@ -3,6 +3,7 @@
 // direct access protection
 if(!defined('KIRBY')) die('Direct access is not allowed');
 
+#[\AllowDynamicProperties]
 class pagination {
   
   // the current page

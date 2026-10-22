@@ -16,6 +16,7 @@ class file extends obj {
     return new obj(a::get($this->meta, $code));
   }
 
+  #[\ReturnTypeWillChange]
   function next() {
 
     if($this->next) return $this->next;
